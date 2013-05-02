@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\winmain.cpp" />
+    <ClCompile Include="Source\TestGame_pch.cpp" />
+    <ClCompile Include="Source\Game\TestGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\DemoStateFactory.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\States\GameTestState.cpp">
+      <Filter>Game\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\TestEntity.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\BoxEntity\BoxEntityRepresentation.cpp">
+      <Filter>Game\Entities\BoxEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\BoxEntity\BoxEntityResource.cpp">
+      <Filter>Game\Entities\BoxEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\BoxEntity\BoxEntity.cpp">
+      <Filter>Game\Entities\BoxEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Meshes\BoxMesh.cpp">
+      <Filter>Renderer\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\PointLightEntity\PointLightEntity.cpp">
+      <Filter>Game\Entities\PointLightEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\PointLightEntity\PointLightEntityRepresentation.cpp">
+      <Filter>Game\Entities\PointLightEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\PointLightEntity\PointLightEntityResource.cpp">
+      <Filter>Game\Entities\PointLightEntity</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\TestGame_pch.h" />
+    <ClInclude Include="Source\Game\TestGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\DemoStateFactory.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\States\GameTestState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\TestEntity.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\BoxEntity\BoxEntityRepresentation.h">
+      <Filter>Game\Entities\BoxEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\BoxEntity\BoxEntityResource.h">
+      <Filter>Game\Entities\BoxEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\BoxEntity\BoxEntity.h">
+      <Filter>Game\Entities\BoxEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Meshes\BoxMesh.h">
+      <Filter>Renderer\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\PointLightEntity\PointLightEntity.h">
+      <Filter>Game\Entities\PointLightEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\PointLightEntity\PointLightEntityRepresentation.h">
+      <Filter>Game\Entities\PointLightEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\PointLightEntity\PointLightEntityResource.h">
+      <Filter>Game\Entities\PointLightEntity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2a442b50-62c3-4fc0-b3c9-227ac575c104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\States">
+      <UniqueIdentifier>{79172e02-015d-40ed-a208-85e920eaccbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities">
+      <UniqueIdentifier>{8d4ef6c5-83af-4671-aa99-3c3f312f5677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\BoxEntity">
+      <UniqueIdentifier>{dbe3091c-f305-475e-887b-aef4353d31d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{0bb00441-7a9a-4fbe-9fad-9f189d4b00a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Meshes">
+      <UniqueIdentifier>{75ce1f7e-f635-4413-b769-e9fb2e9c6b63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\PointLightEntity">
+      <UniqueIdentifier>{c2d25620-d9ab-4960-9e7e-22388dfdd7f6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

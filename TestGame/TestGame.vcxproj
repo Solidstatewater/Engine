@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{16F596CE-F45F-471A-8F1C-96118B5A099C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TestGame</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Test\$(ProjectName)\$(Configuration)</OutDir>
+    <IntDir>Obj\$(Configuration)</IntDir>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Bin\$(ProjectName)\$(Configuration)</OutDir>
+    <IntDir>Obj\$(Configuration)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Memory\Source;$(SolutionDir)Definitions\Source;$(SolutionDir)Messenger\Source;$(SolutionDir)Graphics\Source;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Scene\Source\;$(SolutionDir)AI\Source\;$(SolutionDir)Physics\Source\;$(SolutionDir)Renderer\Source\;$(SolutionDir)Audio\Source\;$(SolutionDir)Game\Source\;$(SolutionDir)Engine\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>TestGame_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>TestGame_pch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalDependencies>Engine.lib;Game.lib;Math.lib;Messenger.lib;Renderer.lib;Physics.lib;Scene.lib;Graphics.lib;d3d11.lib;d3dx11d.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Lib\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Memory\Source;$(SolutionDir)Definitions\Source;$(SolutionDir)Messenger\Source;$(SolutionDir)Graphics\Source;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Scene\Source\;$(SolutionDir)AI\Source\;$(SolutionDir)Physics\Source\;$(SolutionDir)Renderer\Source\;$(SolutionDir)Audio\Source\;$(SolutionDir)Game\Source\;$(SolutionDir)Engine\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>TestGame_pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>TestGame_pch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <AdditionalDependencies>Engine.lib;Game.lib;Math.lib;Messenger.lib;Renderer.lib;Physics.lib;Scene.lib;Graphics.lib;d3d11.lib;d3dx11d.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Lib\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Entities\BoxEntity\BoxEntity.cpp" />
+    <ClCompile Include="Source\Entities\BoxEntity\BoxEntityRepresentation.cpp" />
+    <ClCompile Include="Source\Entities\BoxEntity\BoxEntityResource.cpp" />
+    <ClCompile Include="Source\Entities\PointLightEntity\PointLightEntity.cpp" />
+    <ClCompile Include="Source\Entities\PointLightEntity\PointLightEntityRepresentation.cpp" />
+    <ClCompile Include="Source\Entities\PointLightEntity\PointLightEntityResource.cpp" />
+    <ClCompile Include="Source\Entities\TestEntity.cpp" />
+    <ClCompile Include="Source\Game\DemoStateFactory.cpp" />
+    <ClCompile Include="Source\Game\States\GameTestState.cpp" />
+    <ClCompile Include="Source\Game\TestGame.cpp" />
+    <ClCompile Include="Source\Renderer\Meshes\BoxMesh.cpp" />
+    <ClCompile Include="Source\TestGame_pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Source\winmain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Entities\BoxEntity\BoxEntity.h" />
+    <ClInclude Include="Source\Entities\BoxEntity\BoxEntityRepresentation.h" />
+    <ClInclude Include="Source\Entities\BoxEntity\BoxEntityResource.h" />
+    <ClInclude Include="Source\Entities\PointLightEntity\PointLightEntity.h" />
+    <ClInclude Include="Source\Entities\PointLightEntity\PointLightEntityRepresentation.h" />
+    <ClInclude Include="Source\Entities\PointLightEntity\PointLightEntityResource.h" />
+    <ClInclude Include="Source\Entities\TestEntity.h" />
+    <ClInclude Include="Source\Game\DemoStateFactory.h" />
+    <ClInclude Include="Source\Game\States\GameTestState.h" />
+    <ClInclude Include="Source\Game\TestGame.h" />
+    <ClInclude Include="Source\Renderer\Meshes\BoxMesh.h" />
+    <ClInclude Include="Source\TestGame_pch.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
