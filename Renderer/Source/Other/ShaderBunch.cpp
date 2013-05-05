@@ -11,7 +11,8 @@ AVOID ShaderBunch::VBind()
 }
 
 //Shaders
-AVOID ShaderBunch::VSetVertexShader		(AWSTRING fileName, ASTRING shaderName, INPUT_LAYOUT* layout, AUINT8 num, AUINT16 topology)
+AVOID ShaderBunch::VSetVertexShader		(const AWSTRING & fileName, const ASTRING & shaderName, INPUT_LAYOUT* layout,
+										 AUINT8 num, AUINT16 topology)
 {
 	//create shader
 	m_pVertexShader = make_shared<VertexShader>(VertexShader());
@@ -21,25 +22,26 @@ AVOID ShaderBunch::VSetVertexShader		(AWSTRING fileName, ASTRING shaderName, INP
 	m_pVertexShader->CreateAndCompile(fileName, shaderName, layout, num, topology, pErrors);
 }
 
-AVOID ShaderBunch::VSetHullShader		(AWSTRING fileName, ASTRING shaderName)
+AVOID ShaderBunch::VSetHullShader		(const AWSTRING & fileName, const ASTRING & shaderName)
 {
 	//empty here...
 }
 
-AVOID ShaderBunch::VSetDomainShader		(AWSTRING fileName, ASTRING shaderName)
+AVOID ShaderBunch::VSetDomainShader		(const AWSTRING & fileName, const ASTRING & shaderName)
 {
 	//empty here...
 }
 
-AVOID ShaderBunch::VSetGeometryShader	(AWSTRING fileName, ASTRING shaderName)
+AVOID ShaderBunch::VSetGeometryShader	(const AWSTRING & fileName, const ASTRING & shaderName)
 {
 	//empty here...
 }
 
-AVOID ShaderBunch::VSetPixelShader		(AWSTRING fileName, ASTRING shaderName)
+AVOID ShaderBunch::VSetPixelShader		(const AWSTRING & fileName, const  ASTRING & shaderName)
 {
 	//initialize shader
-	m_pPixelShader = make_shared<PixelShader>(PixelShader());
+	PixelShader & shader = PixelShader();
+	m_pPixelShader = make_shared<PixelShader>(shader);
 
 	//create and compile shader
 	m_pPixelShader->CreateAndCompile(fileName, shaderName);

@@ -44,6 +44,7 @@
     <ClCompile Include="Source\Final\Resources\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Final\Resources\Textures\Texture3D.cpp" />
     <ClCompile Include="Source\Final\States\BlendState.cpp" />
+    <ClCompile Include="Source\Final\States\SamplerState.cpp" />
     <ClCompile Include="Source\Graphics_pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -94,6 +95,7 @@
     <ClInclude Include="Source\Final\Resources\Views\Views.h" />
     <ClInclude Include="Source\Final\Stages\Shaders\Shaders.h" />
     <ClInclude Include="Source\Final\States\BlendState.h" />
+    <ClInclude Include="Source\Final\States\SamplerState.h" />
     <ClInclude Include="Source\Graphics_pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -132,13 +134,13 @@
     <LinkIncremental>true</LinkIncremental>
     <TargetExt>.lib</TargetExt>
     <OutDir>$(SolutionDir)\Lib\$(Configuration)\</OutDir>
-    <IntDir>Obj\$(Configuration)\</IntDir>
+    <IntDir>..\..\Intermediate\Obj\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)Definitions\Source;$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)\Lib\$(Configuration)\</OutDir>
-    <IntDir>Obj\$(Configuration)\</IntDir>
+    <IntDir>..\..\Intermediate\Obj\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)Definitions\Source;$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

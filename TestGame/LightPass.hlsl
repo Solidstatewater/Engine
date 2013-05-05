@@ -9,35 +9,35 @@ cbuffer MatrixBuffer	:	register( c0 )
 	float4x4 WVP;
 };
 
-cbuffer CameraBuffer	:	register( c1 )
-{
-	float3 cameraPos;
-	float  cameraPad;
-};
+//cbuffer CameraBuffer	:	register( c1 )
+//{
+//	float3 cameraPos;
+//	float  cameraPad;
+//};
 
 //Containes variables with general light properties
-cbuffer LightBuffer	:	register( c2 )
+cbuffer LightBuffer	:	register( c1 )
 {
 	//Light Color
-	float3 lightColor;
+	//float3 lightColor;
 	float  lightColorPad;
 
 	//Light Position
-	float3 lightPos;
+	//float3 lightPos;
 	float  lightPosPad;
 
 	//Light Direction
-	float3 lightDir;
+	//float3 lightDir;
 	float  lightType;
 };
 
-cbuffer PointLightBuffer	:	register( c3 )
+cbuffer PointLightBuffer	:	register( c2 )
 {
 	//Light Range
-	float4 lightRange;
+	//float4 lightRange;
 };
 
-cbuffer SpotLightBuffer			:	register( c4 )
+cbuffer SpotLightBuffer			:	register( c3 )
 {
 	//Conus Angles
 	float2 spotLightAngles;
@@ -63,10 +63,10 @@ float4 VS( vs_input input ) : SV_POSITION
 //////////////////////////////////////////
 bool POINT_LIGHT()
 {
-	if (lightType == 1.0f)
+	//if (lightType == 1.0f)
 		return true;
 
-	return false;
+	//return false;
 }
 
 bool SPOT_LIGHT()
@@ -107,6 +107,10 @@ float3 CalcLightning( in float3 position,
 					  in float3 specular,
 					  in float	specPower )
 {
+	float3 lightPos = float3(7.0f, 0.0f, 0.0f);
+	float3 lightDir = float3(0.0f, 0.0f, 0.0f);
+	float3 lightColor = float3(1.0f, 1.0f, 1.0f);
+	float4 lightRange = float4(50.0f, 50.0f, 50.0f, 50.0f);
 	//firstly handle diffuse term
 	float3 L = (float3)0.0f;
 	float atten = 1.0f;
@@ -147,7 +151,9 @@ float3 CalcLightning( in float3 position,
 	float3 H = normalize( L + V );
 	float3 finalSpecular = pow( saturate( dot(normal, H) ), specPower) * lightColor * specular * normalDotL;
 
-	return ( finalDiffuse + finalSpecular) * atten;
+	//return ( finalDiffuse + finalSpecular) * atten;
+	float3 res = diffuse;
+	return res;
 }
 
 float4 PS ( float4 screenPos : SV_POSITION ) : SV_Target
@@ -167,6 +173,5 @@ float4 PS ( float4 screenPos : SV_POSITION ) : SV_Target
 	float3 color = CalcLightning(position, normal, depth,
 							diffuse, specular, specPower);
 
-	//return float4(color, 1.0f);
-	return float4(1.0f, 1.0f, 1.0f, 1.0f);
+	return float4(color, 1.0f);
 }

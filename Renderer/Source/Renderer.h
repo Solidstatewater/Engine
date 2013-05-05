@@ -9,6 +9,7 @@
 
 #include "Cameras\Camera.h"
 #include "Final/Resources/Buffers/Buffers.h"
+#include "Final/States/SamplerState.h"
 #include "Meshes/Meshes.h"
 #include "Lights/Light.h"
 
@@ -16,6 +17,9 @@ namespace Anubis
 {
 	class Renderer
 	{
+		friend class Mesh;
+		friend class Light;
+		friend class PointLight;
 	protected:
 		/** ================================
 				Constant Buffers
@@ -34,6 +38,12 @@ namespace Anubis
 		ConstantBuffer* m_pcbPointLight;
 		ConstantBuffer* m_pcbSpotLight;
 		//ConstantBuffer*	m_pcbDirectionalLight;
+
+		/** ================================
+					Sampler States
+			================================
+											*/
+		SamplerState*	m_pAnisotropySampler16;
 
 		/*** ========================
 					Cameras
@@ -73,6 +83,8 @@ namespace Anubis
 		//Accessors
 		ABOOL LightningOn() const { return m_bLightningOn; }
 		ABOOL TexturingOn() const { return m_bTexturingOn; }
+
+		SamplerState * AnisotropySampler16();
 	};
 
 }; //Anubis

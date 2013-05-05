@@ -77,7 +77,7 @@ namespace Anubis
 		AVIRTUAL AVOID VPushParameters(Scene *pScene, AREAL64 r64CurrentTime);
 
 		//push data to the renderer
-		AVIRTUAL AVOID VSendRenderingData(Renderer * pRenderer);
+		AVIRTUAL AVOID VSendRenderingData(Scene * pScene, Renderer * pRenderer);
 
 		//undo any changes made to the scene
 		AVIRTUAL AVOID VPullParameters(Scene * pScene);

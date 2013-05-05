@@ -65,7 +65,7 @@ EntityRepresentation* RootRepresentation::FindChild(EntityRepresentationId id, R
 AVOID RootRepresentation::VRender(Scene* pScene, Renderer * pRenderer, AREAL64 r64CurrentTime)
 {
 	VPushParameters(pScene, r64CurrentTime);
-	VSendRenderingData(pRenderer);
+	VSendRenderingData(pScene, pRenderer);
 
 	//render all passes
 	for (int i  = 0; i < NUM_RENDER_PASSES; i++)

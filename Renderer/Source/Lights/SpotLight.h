@@ -16,34 +16,28 @@ namespace Anubis
 	protected:
 
 		//define structure with light properties
-		struct SpotLightData : public Light::LightData 
-		{
+		//struct SpotLightData : public Light::LightData 
+		//{
 			AREAL32 m_r32InnerAngleInRadians;
 			AREAL32 m_r32OuterAngleInRadians;
 
-			SpotLightData(AREAL32 r32InnerAngleInRadians, AREAL32 r32OuterAngleInRadians)
-				: m_r32InnerAngleInRadians(r32InnerAngleInRadians), m_r32OuterAngleInRadians(r32OuterAngleInRadians)
-			{
-			}
-		};
+		//	SpotLightData(AREAL32 r32InnerAngleInRadians, AREAL32 r32OuterAngleInRadians)
+		//		: m_r32InnerAngleInRadians(r32InnerAngleInRadians), m_r32OuterAngleInRadians(r32OuterAngleInRadians)
+		//	{
+		//	}
+		//};
 
 		//SpotLightData m_ldData;
 
 	public:
 
 		//Constructor
-		SpotLight  (const Vec color, const Vec pos, const Vec dir,
+		SpotLight  (const Vec& color, const Vec& pos, const Vec& dir,
 					AREAL32 r32InnerAngleInRadians, AREAL32 r32OuterAngleInRadians)
+					: Light(color, pos, dir)
 		{
-			m_pData = new SpotLightData(r32InnerAngleInRadians, r32OuterAngleInRadians);
-
-			//call basic method to fill structure properties
-			FillBasicProperties(color, pos, dir);
-
-			//Create constant buffer
-			BufferParams params;
-			params.FillConstantBufferParams(sizeof(SpotLightData), false, true, true);
-			m_pBuffer->Create(&params, NULL);
+			m_r32InnerAngleInRadians = r32InnerAngleInRadians;
+			m_r32OuterAngleInRadians = r32OuterAngleInRadians;
 		}
 
 		/**

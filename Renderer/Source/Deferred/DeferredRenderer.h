@@ -56,7 +56,7 @@ namespace Anubis
 		AVOID VPushLight(Light * pLight);
 
 		/***	Light Rendering ***/
-		AVOID PrepareForLightPass();
+		AVOID PrepareForLightPass(const Mat4x4 & cameraMatrix);
 
 		/***	Update Render State		***/
 		AVOID VUpdate(const AUINT32 deltaMilliseconds);

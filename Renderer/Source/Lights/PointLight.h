@@ -17,38 +17,32 @@ namespace Anubis
 	protected:
 
 		//define structure with light properties
-		struct PointLightData : public Light::LightData 
-		{
-			AREAL32	m_range;
+		//struct PointLightData : public Light::LightData 
+		//{
+			AREAL32	m_r32Range;
 
-			PointLightData(AREAL32 r32Range) : m_range(r32Range)
-			{
-			}
-		};
+		//	PointLightData(AREAL32 r32Range) : m_range(r32Range)
+		//	{
+		//	}
+		//};
+
 		
 		//SpotLightData	m_ldData;
 
 	public:
 
 		//Constructor
-		PointLight(const Vec color, const Vec pos, const AREAL32 r32Range) : Light()
+		PointLight(const Vec color, const Vec pos, const AREAL32 r32Range) 
+			: Light(color, pos, Vector(0.0f, 0.0f, 0.0f, 1))
 		{
-			m_pData = new PointLightData(r32Range);
-
-			//set basic properties
-			FillBasicProperties(color, pos, Vector(0, 0, 0, 0));
-
-			//Create constant buffer
-			BufferParams params;
-			params.FillConstantBufferParams(sizeof(PointLightData), true, false, false);
-			m_pBuffer->Create(&params, NULL);
+			m_r32Range = r32Range;
 		};
 
 
 		/**
 			== Rendering ==
 							**/
-		AVOID VPreRender();
+		AVOID VPreRender(Renderer *pRenderer);
 		//AVOID VRender();
 
 		/**

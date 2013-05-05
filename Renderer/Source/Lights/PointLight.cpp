@@ -1,13 +1,15 @@
 #include "Renderer_pch.h"
 #include "PointLight.h"
+#include "../Renderer.h"
 
 using namespace Anubis;
 
-AVOID PointLight::VPreRender()
+AVOID PointLight::VPreRender(Renderer *pRenderer)
 {
-	Light::VPreRender();
+	Light::VPreRender(pRenderer);
 
-	//bind constant buffer to the pipeline
-	//m_pBuffer->UpdateSubresource(0, NULL, m_pData, 0, 0);
-	//m_pBuffer->Set(0, ST_Pixel);
+	//bind point light specific data
+	Vec range = Vector(m_r32Range, m_r32Range, m_r32Range, m_r32Range);
+	pRenderer->m_pcbPointLight->UpdateSubresource(0, NULL, &range, 0, 0);
+	pRenderer->m_pcbPointLight->Set(1, ST_Pixel);
 }

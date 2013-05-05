@@ -23,14 +23,18 @@ namespace Anubis
 
 	public:
 		//constructor
-		ShaderBunch() {}
+		ShaderBunch() {
+			m_pVertexShader = nullptr;
+			m_pPixelShader = nullptr;
+		}
 
 		//Shaders
-		AVIRTUAL AVOID VSetVertexShader		(AWSTRING fileName, ASTRING shaderName, INPUT_LAYOUT* layout, AUINT8 num, AUINT16 topology);
-		AVIRTUAL AVOID VSetHullShader		(AWSTRING fileName, ASTRING shaderName);
-		AVIRTUAL AVOID VSetDomainShader		(AWSTRING fileName, ASTRING shaderName);
-		AVIRTUAL AVOID VSetGeometryShader	(AWSTRING fileName, ASTRING shaderName);
-		AVIRTUAL AVOID VSetPixelShader		(AWSTRING fileName, ASTRING shaderName);
+		AVIRTUAL AVOID VSetVertexShader		(const AWSTRING & fileName, const ASTRING & shaderName, INPUT_LAYOUT* layout,
+											 AUINT8 num, AUINT16 topology);
+		AVIRTUAL AVOID VSetHullShader		(const AWSTRING & fileName, const ASTRING & shaderName);
+		AVIRTUAL AVOID VSetDomainShader		(const AWSTRING & fileName, const ASTRING & shaderName);
+		AVIRTUAL AVOID VSetGeometryShader	(const AWSTRING & fileName, const ASTRING & shaderName);
+		AVIRTUAL AVOID VSetPixelShader		(const AWSTRING & fileName, const ASTRING & shaderName);
 
 		AVIRTUAL AVOID VBind();
 	}; 

@@ -120,7 +120,7 @@ AVOID DeferredRenderer::VUpdate(const AUINT32 deltaMilliseconds)
 //Rendering
 ///////////////////////////////////////////////
 
-AVOID DeferredRenderer::PrepareForLightPass()
+AVOID DeferredRenderer::PrepareForLightPass(const Mat4x4 & cameraMatrix)
 {
 	//set vertex buffer with positions
 	m_pVertices->Set(0, 0);
@@ -129,7 +129,9 @@ AVOID DeferredRenderer::PrepareForLightPass()
 	m_pTexCoords->Set(1, 0);
 
 	//bind matrix constant buffer to the pipeline
-	//m_pMatrixBuffer->UpdateSubresource(0, NULL, m_pData, 0, 0);
+	Mat4x4 WVP = cameraMatrix * CreateOrthoProjectionLH(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f, 1000.0f);
+	WVP.Transpose();
+	m_pMatrixBuffer->UpdateSubresource(0, NULL, &WVP, 0, 0);
 	m_pMatrixBuffer->Set(0, ST_Vertex);
 
 }
@@ -145,7 +147,7 @@ AVOID DeferredRenderer::VRender()
 		Mat4x4 viewProj		= view * projection; //calculate view * projection matrix
 
 		//	Rendering to g-buffer
-	/*	m_gbuffer.BindForWriting();
+		m_gbuffer.BindForWriting();
 
 		// ===================================================== //
 		//	Go through sorted render queue and render each mesh  //
@@ -154,7 +156,7 @@ AVOID DeferredRenderer::VRender()
 		while (pMesh = m_queue.Next())
 		{
 			//set states needed for rendering current mesh
-			pMesh->VPreRender(this); 
+			pMesh->VPreRender(this, viewProj); 
 
 			//finally render it
 			pMesh->VRender(this);
@@ -168,12 +170,12 @@ AVOID DeferredRenderer::VRender()
 
 		//set g-buffer for reading and set back buffer as render target
 		m_gbuffer.BindForReading(0);
-		SetRenderTargetView(); */
+		SetRenderTargetView(); 
 
 		// ========================================= //
 		//	Time for light pass - Render all lights  //
 		// ========================================= //
-		PrepareForLightPass();
+		PrepareForLightPass(view);
 
 		for (Light * pLight : m_lights)
 		{
@@ -182,13 +184,13 @@ AVOID DeferredRenderer::VRender()
 				pLight->VInitialize(m_pLayout);
 
 			//set states needed for rendering current light
-			pLight->VPreRender(); 
+			pLight->VPreRender(this); 
 
 			//finally render it
 			pLight->VRender();
 		}
 
 		//unbind g-buffer views
-		//m_gbuffer.UnbindFromReading(0);
+		m_gbuffer.UnbindFromReading(0);
 	}
 }

@@ -60,6 +60,11 @@ AVOID Scene::PushTransform(const Mat4x4 & mat)
 	m_transforms.PushTransform(mat);
 }
 
+Mat4x4 Scene::GetTransform() const
+{
+	return m_transforms.Get();
+}
+
 //remove last transform
 AVOID Scene::PullTransform()
 {

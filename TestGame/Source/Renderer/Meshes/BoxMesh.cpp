@@ -10,6 +10,8 @@
 #include "../../Graphics/Source/Algorithms.h"
 #include "Final\Stages\Shaders\Shaders.h"
 
+#include "Renderer.h"
+
 BoxMesh::BoxMesh(ASTRING fileName)
 {
 	//Initialize buffers
@@ -244,13 +246,20 @@ BoxMesh::BoxMesh(ASTRING fileName)
 	INPUT_LAYOUT layout[] =
 	{
 		{ "POSITION", 0, TEX_R32G32B32_FLOAT, 0, 0,  IA_PER_VERTEX_DATA, 0},
-		{ "TEXCOORDS", 0, TEX_R32G32_FLOAT,	  0, 12, IA_PER_VERTEX_DATA, 0},
-		{ "NORMAL",   0, TEX_R32G32B32_FLOAT, 0, 20, IA_PER_VERTEX_DATA, 0},
-		{ "BINORMAL", 0, TEX_R32G32B32_FLOAT, 0, 32, IA_PER_VERTEX_DATA, 0},
-		{ "TANGENT",  0, TEX_R32G32B32_FLOAT, 0, 44, IA_PER_VERTEX_DATA, 0},
+		{ "TEXCOORDS", 0, TEX_R32G32_FLOAT,	  1, 0,  IA_PER_VERTEX_DATA, 0},
+		{ "NORMAL",   0, TEX_R32G32B32_FLOAT, 2, 0,  IA_PER_VERTEX_DATA, 0},
+		{ "BINORMAL", 0, TEX_R32G32B32_FLOAT, 3, 12, IA_PER_VERTEX_DATA, 0},
+		{ "TANGENT",  0, TEX_R32G32B32_FLOAT, 4, 24, IA_PER_VERTEX_DATA, 0},
 	};
 
 	//Initialize shaders
 	m_pShaders->VSetVertexShader(L"GBufferShader.hlsl", "VS", layout, 5, TOPOLOGY_TRIANGLELIST);
 	m_pShaders->VSetPixelShader(L"GBufferShader.hlsl", "PS");
+}
+
+AVOID BoxMesh::VPreRender(Renderer* pRenderer, const Mat4x4 & viewprojection)
+{
+	Mesh::VPreRender(pRenderer, viewprojection);
+
+	pRenderer->AnisotropySampler16()->Set(0, ST_Pixel);
 }

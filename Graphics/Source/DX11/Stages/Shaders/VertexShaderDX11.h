@@ -27,7 +27,7 @@ namespace Anubis
 
 		ABOOL Create(BlobDX11 & shaderbuffer, INPUT_LAYOUT* layout, AUINT8 num,
 										 AUINT16 topology);
-		ABOOL CreateAndCompile(AWSTRING fileName, ASTRING entrypoint, INPUT_LAYOUT* layout, AUINT8 num,
+		ABOOL CreateAndCompile(const AWSTRING& fileName, const ASTRING& entrypoint, INPUT_LAYOUT* layout, AUINT8 num,
 			AUINT16 topology, BlobDX11 * pErrors = NULL);
 
 		AVOID Set() const;

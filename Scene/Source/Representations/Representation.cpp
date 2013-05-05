@@ -64,7 +64,7 @@ AVOID EntityRepresentation::VRender(Scene * pScene, Renderer * pRenderer, AREAL6
 	VPushParameters(pScene, r64CurrentTime);
 
 	//send rendering data to the renderer
-	VSendRenderingData(pRenderer);
+	VSendRenderingData(pScene, pRenderer);
 
 	//render all children
 	for (EntityRepresentation* pRepr : m_children)
@@ -81,11 +81,12 @@ AVOID EntityRepresentation::VPushParameters(Scene *pScene, AREAL64 r64CurrentTim
 }
 
 //push data to the renderer
-AVOID EntityRepresentation::VSendRenderingData(Renderer * pRenderer)
+AVOID EntityRepresentation::VSendRenderingData(Scene * pScene, Renderer * pRenderer)
 {
 	//send all meshes to the renderer
 	for (MeshPtr pMesh : m_meshes)
 	{
+		pMesh->SetWorldTransform(pScene->GetTransform());
 		pRenderer->VPushMesh(&*pMesh);
 	}
 

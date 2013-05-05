@@ -51,6 +51,9 @@ namespace Anubis
 		//update current world transform
 		AVOID PushTransform(const Mat4x4 & mat);
 
+		//get current tranform
+		Mat4x4 GetTransform() const;
+
 		//remove last transform
 		AVOID PullTransform();
 

@@ -1,11 +1,13 @@
 #include "Renderer_pch.h"
 #include "Light.h"
 #include "Final\General.h"
+#include "../Renderer.h"
 
 using namespace Anubis;
 
 ABOOL Light::VInitialize(INPUT_LAYOUT * pLayout)
 {
+	m_pShaders = new ShaderBunch();
 	m_pShaders->VSetVertexShader(m_shaderFile,	DEFAULT_VERTEX_SHADER_NAME, pLayout, 2, TOPOLOGY_TRIANGLELIST);
 	m_pShaders->VSetPixelShader(m_shaderFile,	DEFAULT_PIXEL_SHADER_NAME);
 
@@ -14,14 +16,14 @@ ABOOL Light::VInitialize(INPUT_LAYOUT * pLayout)
 	return true;
 }
 
-AVOID Light::VPreRender()
+AVOID Light::VPreRender(Renderer *pRenderer)
 {
 	//set shader
 	m_pShaders->VBind();
 
 	//bind constant buffer to the pipeline
-	m_pBuffer->UpdateSubresource(0, NULL, m_pData, 0, 0);
-	m_pBuffer->Set(0, ST_Pixel);
+	pRenderer->m_pcbLight->UpdateSubresource(0, NULL, m_pData, 0, 0);
+	pRenderer->m_pcbLight->Set(0, ST_Pixel);
 }
 
 AVOID Light::VRender()

@@ -26,6 +26,7 @@ namespace Anubis
 	/************************************************************
 	============= Class with basic light properties =============
 	************************************************************/
+	class Renderer;
 	class ALIGN16 Light
 	{
 	protected:
@@ -37,7 +38,7 @@ namespace Anubis
 		ShaderBunch*	m_pShaders;
 
 		/*** Constant Buffer With Light Data ***/
-		ConstantBuffer*	m_pBuffer; 
+		//ConstantBuffer*	m_pBuffer; 
 
 		/**				
 			== Light Data ==
@@ -57,17 +58,26 @@ namespace Anubis
 		//Constructor
 		Light(const AWSTRING & shaderFile = DEFAULT_LIGHT_PASS_SHADER_FILE) : m_bInitialized(false)
 		{
-			m_pBuffer = new ConstantBuffer();
-			m_pShaders = new ShaderBunch();
+			m_pShaders = NULL;
 
 			m_shaderFile = shaderFile;
+		}
+		Light(const Vec& color, const Vec& pos, const Vec& dir,
+			const AWSTRING & shaderFile = DEFAULT_LIGHT_PASS_SHADER_FILE) : m_bInitialized(false)
+		{
+			m_pShaders = NULL;
+
+			m_shaderFile = shaderFile;
+
+			m_pData = new LightData();
+			FillBasicProperties(color, pos, dir);
 		}
 		~Light() { SAFE_DELETE(m_pData); }
 
 		AVIRTUAL ABOOL VInitialize(INPUT_LAYOUT * pLayout);
 
 		//Fill with data
-		AVOID FillBasicProperties(const Vec color, const Vec pos, const Vec dir)
+		AVOID FillBasicProperties(const Vec& color, const Vec& pos, const Vec& dir)
 		{
 			m_pData->m_color = color;
 			m_pData->m_pos = pos;
@@ -88,7 +98,7 @@ namespace Anubis
 		/**
 			== Rendering ==
 							**/
-		AVIRTUAL AVOID VPreRender();
+		AVIRTUAL AVOID VPreRender(Renderer *pRenderer);
 		AVIRTUAL AVOID VRender();
 	};
 

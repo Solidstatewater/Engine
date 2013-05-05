@@ -45,10 +45,10 @@ AVOID ShaderResourceViewDX11::Set(AUINT16 slot, ShaderType type) const
 		D3D11DeviceContext()->DSSetShaderResources(slot, 1, &m_pView);
 		break;
 	case ST_Geometry:
-		D3D11DeviceContext()->VSSetShaderResources(slot, 1, &m_pView);
+		D3D11DeviceContext()->GSSetShaderResources(slot, 1, &m_pView);
 		break;
 	case ST_Pixel:
-		D3D11DeviceContext()->VSSetShaderResources(slot, 1, &m_pView);
+		D3D11DeviceContext()->PSSetShaderResources(slot, 1, &m_pView);
 		break;
 	default:
 		ASSERT(0);
@@ -91,10 +91,10 @@ AVOID ShaderResourceViewListDX11::Set(AUINT16 slot, ShaderType type) const
 		D3D11DeviceContext()->DSSetShaderResources(slot, m_numViews, m_ppViews);
 		break;
 	case ST_Geometry:
-		D3D11DeviceContext()->VSSetShaderResources(slot, m_numViews, m_ppViews);
+		D3D11DeviceContext()->GSSetShaderResources(slot, m_numViews, m_ppViews);
 		break;
 	case ST_Pixel:
-		D3D11DeviceContext()->VSSetShaderResources(slot, m_numViews, m_ppViews);
+		D3D11DeviceContext()->PSSetShaderResources(slot, m_numViews, m_ppViews);
 		break;
 	default:
 		ASSERT(0);

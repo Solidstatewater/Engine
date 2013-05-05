@@ -41,6 +41,7 @@ namespace Anubis
 						***/
 		Texture2DPtr	m_pPosTex;
 		Texture2DPtr	m_pNormalTex;
+		Texture2DPtr	m_pDepthTex;
 		Texture2DPtr	m_pDiffuseTex;
 		Texture2DPtr	m_pSpecularTex;
 

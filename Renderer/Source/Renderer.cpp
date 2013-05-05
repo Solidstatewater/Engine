@@ -21,6 +21,7 @@ using namespace Anubis;
 
 Renderer::Renderer() : m_bTexturingOn(true), m_bLightningOn(true)
 {
+	m_pAnisotropySampler16 = new SamplerState();
 }
 
 ABOOL Renderer::VInitialize(HWND hWnd, AUINT32 width, AUINT32 height)
@@ -104,4 +105,17 @@ AVOID Renderer::RemoveCamera(CameraPtr pCamera)
 
 	//no such camera
 	ASSERT(0 && "No such camera was found!");
+}
+
+SamplerState* Renderer::AnisotropySampler16()
+{
+	if (m_pAnisotropySampler16)	return m_pAnisotropySampler16;
+
+	//it's not created yet
+	SamplerStateParams params;
+	params.Init(FILTER_ANISOTROPIC, TEXTURE_ADDRESS_WRAP,
+		TEXTURE_ADDRESS_WRAP, TEXTURE_ADDRESS_WRAP, 0, 16, COMPARISON_NEVER);
+	m_pAnisotropySampler16->Create(&params);
+
+	return m_pAnisotropySampler16;
 }

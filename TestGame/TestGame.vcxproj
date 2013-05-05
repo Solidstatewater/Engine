@@ -41,14 +41,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Test\$(ProjectName)\$(Configuration)</OutDir>
-    <IntDir>Obj\$(Configuration)</IntDir>
+    <OutDir>..\..\Test\$(ProjectName)\</OutDir>
+    <IntDir>..\..\Intermediate\Obj\$(ProjectName)\$(Configuration)\</IntDir>
     <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Bin\$(ProjectName)\$(Configuration)</OutDir>
-    <IntDir>Obj\$(Configuration)</IntDir>
+    <OutDir>..\..\Demos\$(ProjectName)\</OutDir>
+    <IntDir>..\..\Intermediate\Obj\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

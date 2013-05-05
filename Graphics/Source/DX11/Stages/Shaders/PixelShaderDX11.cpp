@@ -17,7 +17,7 @@ ABOOL PixelShaderDX11::Create(BlobDX11 & shaderbuffer)
 	VALID(hr);
 }
 
-ABOOL PixelShaderDX11::CreateAndCompile(AWSTRING fileName, ASTRING entrypoint, BlobDX11 * pErrors)
+ABOOL PixelShaderDX11::CreateAndCompile(const AWSTRING & fileName, const ASTRING & entrypoint, BlobDX11 * pErrors)
 {
 	//Compile the shader first
 	BlobDX11 & compiledShaderBlob = BlobDX11();

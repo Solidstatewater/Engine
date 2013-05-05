@@ -13,4 +13,5 @@ class BoxMesh : public Mesh
 {
 public:
 	BoxMesh(ASTRING fileName);
+	AVOID VPreRender(Renderer* pRenderer, const Mat4x4 & viewprojection);
 };

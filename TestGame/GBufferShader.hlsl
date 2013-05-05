@@ -120,7 +120,6 @@ ps_output	PS( ps_input input )
 	float depth = input.posCS.z / input.posCS.w;
 
 	//fill the g-buffer
-	//output.position			= float4(input.posWS, 1.0f);
 	output.position			= float4(input.posWS.x, input.posWS.y, input.posWS.z, 1.0f);
 	output.normal			= float4(normalWS, 1.0f);
 	output.depth			= float4(depth, depth, depth, 1.0f);

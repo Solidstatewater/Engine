@@ -6,7 +6,7 @@
 
 using namespace Anubis;
 
-ABOOL BlobDX11::CompileShader(AWSTRING fileName, ASTRING entrypoint,
+ABOOL BlobDX11::CompileShader(const AWSTRING & fileName, const ASTRING & entrypoint,
 									ShaderType type, BlobDX11 * pErrors) const
 {
 	//Check what type of shader we are compiling

@@ -16,26 +16,17 @@ namespace Anubis
 	protected:
 
 		//define structure with light properties
-		struct DirectionalLightData : public Light::LightData 
-		{
-		};
+		//struct DirectionalLightData : public Light::LightData 
+		//{
+		//};
 
 		//DirectionalLightData	m_ldData;
 
 	public:
 
 		//Constructor
-		DirectionalLight(const Vec color, const Vec pos, const Vec dir)
+		DirectionalLight(const Vec& color, const Vec& pos, const Vec& dir) : Light(color, pos, dir)
 		{
-			m_pData = new DirectionalLightData();
-
-			//call basic method to fill structure properties
-			FillBasicProperties(color, pos, dir);
-
-			//Create constant buffer
-			BufferParams params;
-			params.FillConstantBufferParams(sizeof(DirectionalLightData), false, true, true);
-			m_pBuffer->Create(&params, NULL);
 		};
 
 		/**
