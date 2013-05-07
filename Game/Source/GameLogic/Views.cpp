@@ -37,7 +37,7 @@ AVOID PlayerView::VRender(AREAL64 r64Time, AREAL64 r64ElapsedTime)
 {
 	//Clean back buffer render target and depth stencil
 	//ALIGN16 AREAL32 bgColor[4] = { 0.0f, 1.0f, 1.0f, 1.0f }; //color
-	ALIGN16 AREAL32 bg[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	ALIGN16 AREAL32 bg[4] = { 1.0f, 0.0f, 1.0f, 1.0f };
 	ClearRenderTargetView(bg, NULL);
 	ClearDepthStencilView(true, true, 1.0f, 0, NULL);
 }

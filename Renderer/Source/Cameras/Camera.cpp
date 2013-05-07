@@ -26,7 +26,7 @@ Camera::~Camera()
 AVOID Camera::UpdateTransforms()
 {
 	Mat4x4 rot;
-	rot.CreateRollPitchYaw(m_roll, m_pitch, m_yaw);
+	rot = rot.CreateRollPitchYaw(m_roll, m_pitch, m_yaw);
 
 	//calculate point camera is focusing
 	m_lookAt = m_pos + m_dir * rot;
@@ -45,4 +45,15 @@ AVOID Camera::VUpdate(AUINT32 const elapsedMs)
 Mat4x4 Camera::GetOrthoProjection() const
 {
 	return CreateOrthoProjectionLH(1280, 720, m_frustum.GetNearZ(), m_frustum.GetFarZ());
+}
+
+Vec Camera::GetLookAt() const
+{
+	Mat4x4 rot;
+	rot = rot.CreateRollPitchYaw(m_roll, m_pitch, m_yaw);
+
+	Vec lookAt;
+	lookAt = m_pos + m_dir * rot;
+
+	return lookAt;
 }

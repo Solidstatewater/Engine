@@ -169,17 +169,17 @@ BoxMesh::BoxMesh(ASTRING fileName)
 		CreateNormalTangentBinormal(&pos[i*3], &texCoords[i*3], normal, tangent, binormal);
 
 		//fill the data for vertex buffer
-		normalData[i].normal = normal;
-		normalData[i].tangent = tangent;
-		normalData[i].binormal = binormal;
+		normalData[i+2].normal = normal;
+		normalData[i+2].tangent = tangent;
+		normalData[i+2].binormal = binormal;
 
 		normalData[i+1].normal = normal;
 		normalData[i+1].tangent = tangent;
 		normalData[i+1].binormal = binormal;
 
-		normalData[i+2].normal = normal;
-		normalData[i+2].tangent = tangent;
-		normalData[i+2].binormal = binormal;
+		normalData[i].normal = normal;
+		normalData[i].tangent = tangent;
+		normalData[i].binormal = binormal;
 	}
 	/*
 	float3 normalData[] =
@@ -248,8 +248,8 @@ BoxMesh::BoxMesh(ASTRING fileName)
 		{ "POSITION", 0, TEX_R32G32B32_FLOAT, 0, 0,  IA_PER_VERTEX_DATA, 0},
 		{ "TEXCOORDS", 0, TEX_R32G32_FLOAT,	  1, 0,  IA_PER_VERTEX_DATA, 0},
 		{ "NORMAL",   0, TEX_R32G32B32_FLOAT, 2, 0,  IA_PER_VERTEX_DATA, 0},
-		{ "BINORMAL", 0, TEX_R32G32B32_FLOAT, 3, 12, IA_PER_VERTEX_DATA, 0},
-		{ "TANGENT",  0, TEX_R32G32B32_FLOAT, 4, 24, IA_PER_VERTEX_DATA, 0},
+		{ "TANGENT", 0, TEX_R32G32B32_FLOAT, 2, 12, IA_PER_VERTEX_DATA, 0},
+		{ "BINORMAL",  0, TEX_R32G32B32_FLOAT, 2, 24, IA_PER_VERTEX_DATA, 0},
 	};
 
 	//Initialize shaders

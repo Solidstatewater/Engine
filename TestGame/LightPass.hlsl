@@ -107,7 +107,7 @@ float3 CalcLightning( in float3 position,
 					  in float3 specular,
 					  in float	specPower )
 {
-	float3 lightPos = float3(7.0f, 0.0f, 0.0f);
+	float3 lightPos = float3(0.0f, 10.0f, -2.0f);
 	float3 lightDir = float3(0.0f, 0.0f, 0.0f);
 	float3 lightColor = float3(1.0f, 1.0f, 1.0f);
 	float4 lightRange = float4(50.0f, 50.0f, 50.0f, 50.0f);
@@ -145,15 +145,16 @@ float3 CalcLightning( in float3 position,
 	float normalDotL = saturate(dot(normal, L));
 	float3 finalDiffuse = diffuse * lightColor * normalDotL;
 
-	float3 camera = float3(0.0f, 0.0f, -7.0f);
+	float3 camera = float3(0.0f, 0.0f, -3.0f);
 	//now handle specular term
 	float3 V = camera - position; //view vector
 	float3 H = normalize( L + V );
 	float3 finalSpecular = pow( saturate( dot(normal, H) ), specPower) * lightColor * specular * normalDotL;
 
-	//return ( finalDiffuse + finalSpecular) * atten;
-	float3 res = diffuse;
-	return res;
+	return ( finalDiffuse + finalSpecular) * atten;
+	//float3 res = normal;
+	//float3 res = float3(depth, depth, depth);
+	//return res;
 }
 
 float4 PS ( float4 screenPos : SV_POSITION ) : SV_Target

@@ -18,8 +18,10 @@ namespace Anubis
 	class ShaderBunch
 	{
 	private:
-		VertexShaderPtr	m_pVertexShader;
-		PixelShaderPtr	m_pPixelShader;
+		//VertexShaderPtr	m_pVertexShader;
+		//PixelShaderPtr	m_pPixelShader;
+		VertexShader*	m_pVertexShader;
+		PixelShader*	m_pPixelShader;
 
 	public:
 		//constructor
@@ -27,6 +29,9 @@ namespace Anubis
 			m_pVertexShader = nullptr;
 			m_pPixelShader = nullptr;
 		}
+
+		//destrutor
+		~ShaderBunch();
 
 		//Shaders
 		AVIRTUAL AVOID VSetVertexShader		(const AWSTRING & fileName, const ASTRING & shaderName, INPUT_LAYOUT* layout,

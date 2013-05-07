@@ -85,6 +85,7 @@ namespace Anubis
 		AINLINE Mat4x4	GetOrthoProjection() const;
 
 		AINLINE Vec		GetPosition()		const { return m_pos; }
+		Vec				GetLookAt()			const;
 
 		AINLINE AREAL	GetRoll()			const { return m_roll; }
 		AINLINE AREAL	GetPitch()			const { return m_pitch; }

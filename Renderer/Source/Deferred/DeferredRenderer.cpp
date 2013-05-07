@@ -120,7 +120,7 @@ AVOID DeferredRenderer::VUpdate(const AUINT32 deltaMilliseconds)
 //Rendering
 ///////////////////////////////////////////////
 
-AVOID DeferredRenderer::PrepareForLightPass(const Mat4x4 & cameraMatrix)
+AVOID DeferredRenderer::PrepareForLightPass(CameraPtr pCamera)
 {
 	//set vertex buffer with positions
 	m_pVertices->Set(0, 0);
@@ -129,7 +129,13 @@ AVOID DeferredRenderer::PrepareForLightPass(const Mat4x4 & cameraMatrix)
 	m_pTexCoords->Set(1, 0);
 
 	//bind matrix constant buffer to the pipeline
-	Mat4x4 WVP = cameraMatrix * CreateOrthoProjectionLH(SCREEN_WIDTH, SCREEN_HEIGHT, 1.0f, 1000.0f);
+	Mat4x4 trans;
+	trans.CreateTranslation(pCamera->GetLookAt());
+
+	Mat4x4 rot;
+	rot = rot.CreateRollPitchYaw(pCamera->GetRoll(), pCamera->GetPitch(), pCamera->GetYaw());
+
+	Mat4x4 WVP = rot * trans * pCamera->GetView() * CreateOrthoProjectionLH(SCREEN_WIDTH, SCREEN_HEIGHT, 0.1f, 1000.0f);
 	WVP.Transpose();
 	m_pMatrixBuffer->UpdateSubresource(0, NULL, &WVP, 0, 0);
 	m_pMatrixBuffer->Set(0, ST_Vertex);
@@ -175,7 +181,7 @@ AVOID DeferredRenderer::VRender()
 		// ========================================= //
 		//	Time for light pass - Render all lights  //
 		// ========================================= //
-		PrepareForLightPass(view);
+		PrepareForLightPass(pCamera);
 
 		for (Light * pLight : m_lights)
 		{
