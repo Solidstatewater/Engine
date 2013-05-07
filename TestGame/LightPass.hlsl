@@ -9,35 +9,35 @@ cbuffer MatrixBuffer	:	register( c0 )
 	float4x4 WVP;
 };
 
-//cbuffer CameraBuffer	:	register( c1 )
-//{
-//	float3 cameraPos;
-//	float  cameraPad;
-//};
+cbuffer CameraBuffer	:	register( c1 )
+{
+	float3 cameraPos;
+	float  cameraPad;
+};
 
 //Containes variables with general light properties
-cbuffer LightBuffer	:	register( c1 )
+cbuffer LightBuffer	:	register( c2 )
 {
 	//Light Color
-	//float3 lightColor;
+	float3 lightColor;
 	float  lightColorPad;
 
 	//Light Position
-	//float3 lightPos;
+	float3 lightPos;
 	float  lightPosPad;
 
 	//Light Direction
-	//float3 lightDir;
+	float3 lightDir;
 	float  lightType;
 };
 
-cbuffer PointLightBuffer	:	register( c2 )
+cbuffer PointLightBuffer	:	register( c3 )
 {
 	//Light Range
-	//float4 lightRange;
+	float4 lightRange;
 };
 
-cbuffer SpotLightBuffer			:	register( c3 )
+cbuffer SpotLightBuffer			:	register( c4 )
 {
 	//Conus Angles
 	float2 spotLightAngles;
@@ -63,10 +63,10 @@ float4 VS( vs_input input ) : SV_POSITION
 //////////////////////////////////////////
 bool POINT_LIGHT()
 {
-	//if (lightType == 1.0f)
+	if (lightType == 1.0f)
 		return true;
 
-	//return false;
+	return false;
 }
 
 bool SPOT_LIGHT()
@@ -107,10 +107,6 @@ float3 CalcLightning( in float3 position,
 					  in float3 specular,
 					  in float	specPower )
 {
-	float3 lightPos = float3(0.0f, 10.0f, -2.0f);
-	float3 lightDir = float3(0.0f, 0.0f, 0.0f);
-	float3 lightColor = float3(1.0f, 1.0f, 1.0f);
-	float4 lightRange = float4(50.0f, 50.0f, 50.0f, 50.0f);
 	//firstly handle diffuse term
 	float3 L = (float3)0.0f;
 	float atten = 1.0f;
@@ -145,9 +141,9 @@ float3 CalcLightning( in float3 position,
 	float normalDotL = saturate(dot(normal, L));
 	float3 finalDiffuse = diffuse * lightColor * normalDotL;
 
-	float3 camera = float3(0.0f, 0.0f, -3.0f);
+	//float3 camera = float3(0.0f, 0.0f, -3.0f);
 	//now handle specular term
-	float3 V = camera - position; //view vector
+	float3 V = cameraPos - position; //view vector
 	float3 H = normalize( L + V );
 	float3 finalSpecular = pow( saturate( dot(normal, H) ), specPower) * lightColor * specular * normalDotL;
 

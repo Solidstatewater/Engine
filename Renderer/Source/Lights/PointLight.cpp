@@ -11,5 +11,5 @@ AVOID PointLight::VPreRender(Renderer *pRenderer)
 	//bind point light specific data
 	Vec range = Vector(m_r32Range, m_r32Range, m_r32Range, m_r32Range);
 	pRenderer->m_pcbPointLight->UpdateSubresource(0, NULL, &range, 0, 0);
-	pRenderer->m_pcbPointLight->Set(1, ST_Pixel);
+	pRenderer->m_pcbPointLight->Set(2, ST_Pixel);
 }

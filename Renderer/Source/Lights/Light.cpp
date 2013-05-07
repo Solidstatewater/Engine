@@ -23,7 +23,7 @@ AVOID Light::VPreRender(Renderer *pRenderer)
 
 	//bind constant buffer to the pipeline
 	pRenderer->m_pcbLight->UpdateSubresource(0, NULL, m_pData, 0, 0);
-	pRenderer->m_pcbLight->Set(0, ST_Pixel);
+	pRenderer->m_pcbLight->Set(1, ST_Pixel);
 }
 
 AVOID Light::VRender()

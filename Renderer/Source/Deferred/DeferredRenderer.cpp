@@ -140,6 +140,8 @@ AVOID DeferredRenderer::PrepareForLightPass(CameraPtr pCamera)
 	m_pMatrixBuffer->UpdateSubresource(0, NULL, &WVP, 0, 0);
 	m_pMatrixBuffer->Set(0, ST_Vertex);
 
+	m_pcbCameraPos->UpdateSubresource(0, NULL, &pCamera->GetPosition(), 0, 0);
+	m_pcbCameraPos->Set(0, ST_Pixel);
 }
 
 AVOID DeferredRenderer::VRender()

@@ -169,17 +169,17 @@ BoxMesh::BoxMesh(ASTRING fileName)
 		CreateNormalTangentBinormal(&pos[i*3], &texCoords[i*3], normal, tangent, binormal);
 
 		//fill the data for vertex buffer
-		normalData[i+2].normal = normal;
-		normalData[i+2].tangent = tangent;
-		normalData[i+2].binormal = binormal;
+		normalData[i*3+2].normal = normal;
+		normalData[i*3+2].tangent = tangent;
+		normalData[i*3+2].binormal = binormal;
 
-		normalData[i+1].normal = normal;
-		normalData[i+1].tangent = tangent;
-		normalData[i+1].binormal = binormal;
+		normalData[i*3+1].normal = normal;
+		normalData[i*3+1].tangent = tangent;
+		normalData[i*3+1].binormal = binormal;
 
-		normalData[i].normal = normal;
-		normalData[i].tangent = tangent;
-		normalData[i].binormal = binormal;
+		normalData[i*3].normal = normal;
+		normalData[i*3].tangent = tangent;
+		normalData[i*3].binormal = binormal;
 	}
 	/*
 	float3 normalData[] =
