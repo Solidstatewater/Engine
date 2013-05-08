@@ -120,6 +120,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Water", "Water\Water.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Memory", "Memory\Memory.vcxproj", "{E03C2CA3-E6DB-4790-9D40-6F5B01004E00}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZJSONTest", "ZJSONTest\ZJSONTest.vcxproj", "{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -349,6 +351,15 @@ Global
 		{E03C2CA3-E6DB-4790-9D40-6F5B01004E00}.Release|Win32.ActiveCfg = Release|Win32
 		{E03C2CA3-E6DB-4790-9D40-6F5B01004E00}.Release|Win32.Build.0 = Release|Win32
 		{E03C2CA3-E6DB-4790-9D40-6F5B01004E00}.Release|x64.ActiveCfg = Release|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Debug|Win32.Build.0 = Debug|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Debug|x64.ActiveCfg = Debug|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Profile|Win32.ActiveCfg = Release|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Profile|Win32.Build.0 = Release|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Profile|x64.ActiveCfg = Release|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Release|Win32.ActiveCfg = Release|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Release|Win32.Build.0 = Release|Win32
+		{C003D906-0E7C-4BB8-BC72-FA30D1140AC4}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

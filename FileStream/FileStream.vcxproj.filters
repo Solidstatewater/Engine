@@ -4,17 +4,26 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{3babb750-7c35-4ce9-9639-b14059721832}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{5024a48a-e2a5-4229-830c-55563764576a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\FileStream_pch.h" />
     <ClInclude Include="Source\Scene\AnimationLoader.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Data\JSONLoader.h">
+      <Filter>Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\FileStream_pch.cpp" />
     <ClCompile Include="Source\Scene\AnimationLoader.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Data\JSONLoader.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
