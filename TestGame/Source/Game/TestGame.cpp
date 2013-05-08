@@ -10,11 +10,12 @@ ABOOL TestGame::VInitialize()
 
 	//Add camera
 	Frustum & frustum = Frustum();
-	frustum.Init(Pi / 2.0, 1280.0 / 720.0, 0.1, 100.0);
-	CameraPtr pCamera = make_shared<Camera>(Camera(frustum, Vector(-5.0f, 3.0f, -3.0, 1.0f),
+	//frustum.Init(Pi / 2.0, 1280.0 / 720.0, 0.1, 100.0);
+	frustum.Init( 0.4f * 3.14f, 1280.0f / 720.0f, 1.0f, 1000.0f);
+	CameraPtr pCamera = make_shared<Camera>(Camera(frustum, Vector(-1.0f, 4.0f, -6.0, 1.0f),
 		Vector(0.0f, 0.0f, 1.0f, 0.0f),
 		Vector(0.0f, 1.0f, 0.0f, 0.0f),
-		0.0f, 0.0, 0.0));
+		0.0f, 0.2, 0.0));
 
 	pView->VSetCamera(pCamera);
 

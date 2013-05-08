@@ -20,8 +20,8 @@ struct ALIGN16 PointLightEntityResource : public EntityResource
 	PointLightEntityResource() : EntityResource()
 	{
 		m_color = Vector(1.0f, 1.0f, 1.0f, 1.0f);
-		m_pos = Vector(-2.0f, 2.0f, -2.0f, 1.0f);
-		m_r32Range = 10.0f;
+		m_pos = Vector(-6.0f, 5.0f, 0.0f, 1.0f);
+		m_r32Range = 25.0f;
 	}
 
 	~PointLightEntityResource() {}

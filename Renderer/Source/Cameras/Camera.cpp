@@ -9,9 +9,11 @@ Camera::Camera(	const Frustum & frustum,
 				Viewport * pViewport/* = NULL */)
 				:	
 					m_frustum(frustum), m_bActive(true), m_bDebug(false),
-					m_pos(position), m_dir(dir), m_up(up),
+					m_pos(position), m_up(up),
 					m_yaw(yaw), m_pitch(pitch), m_roll(roll)
 {
+	m_dir = Normalize(dir);
+
 	//initalize matrices
 	UpdateTransforms();
 

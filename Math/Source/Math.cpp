@@ -98,11 +98,17 @@ Mat4x4 Anubis::CreatePerspectiveProjectionLH(	const AREAL fov,   const AREAL asp
 {
 	Mat4x4 mat;
 
-	AREAL yscale = CtgR32(fov / 2);
-	AREAL xscale = yscale / aspect;
+	//AREAL yscale = CtgR32(fov / 2);
+	//AREAL xscale = yscale / aspect;
 
-	mat.Init(	Vector(xscale, 0, 0, 0),
-				Vector(0, yscale, 0, 0),
+	AREAL SinFov = Sin(fov * 0.5f);
+	AREAL CosFov = Cos(fov * 0.5f);
+
+	AREAL height = CosFov / SinFov;
+	AREAL width = height / aspect;
+
+	mat.Init(	Vector(width, 0, 0, 0),
+				Vector(0, height, 0, 0),
 				Vector(0, 0, farZ/(farZ-nearZ), 1),
 				Vector(0, 0, -nearZ*farZ/(farZ-nearZ), 0) );
 
