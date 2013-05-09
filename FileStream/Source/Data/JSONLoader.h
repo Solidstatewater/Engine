@@ -8,14 +8,15 @@
 //========================================================================
 
 #include "Types.h"
-#include "rapidjson/document.h"
+#include "rapidjson\document.h"
 
 namespace Anubis
 {
 	class JSONLoader
 	{
 	private:
-		static rapidjson::Document m_doc;
+		//static rapidjson::Document m_doc;
+		//static rapidjson::GenericDocument<struct rapidjson::UTF8<char>, class rapidjson::MemoryPoolAllocator<class rapidjson::CrtAllocator> > m_doc;
 
 	public:
 		//Parse document or string with JSON format
@@ -30,6 +31,6 @@ namespace Anubis
 		static AINT32	GetAINT32	(const ACHAR * const field);
 		static AINT64	GetAINT64	(const ACHAR * const field);
 		static AREAL32	GetAREAL32	(const ACHAR * const field);
-		static AREAL64	GetAREAL64	(const ACHAR * const field);
+		static AREAL64	GetAREAL64	(const ACHAR * const field); 
 	};
 }; //Anubis

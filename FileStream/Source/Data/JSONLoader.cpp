@@ -8,6 +8,8 @@ using namespace Anubis;
 using namespace rapidjson;
 using namespace std;
 
+GenericDocument<struct rapidjson::UTF8<char>, class rapidjson::MemoryPoolAllocator<class rapidjson::CrtAllocator> > g_doc;
+
 ABOOL JSONLoader::Parse(const ACHAR * const pJSON)
 {
 	if (!pJSON)
@@ -17,7 +19,7 @@ ABOOL JSONLoader::Parse(const ACHAR * const pJSON)
 	}
 
 	//parse file
-	m_doc.Parse<0>(pJSON);
+	g_doc.Parse<0>(pJSON);
 
 	return true;
 }
@@ -34,63 +36,63 @@ ABOOL JSONLoader::Parse(const ASTRING & filename)
 
 	//try to parse it
 	FileStream file(pFile);
-	m_doc.ParseStream<0>(file);
+	g_doc.ParseStream<0>(file);
 
 	return true;
 }
 
 ABOOL	JSONLoader::GetBool		(const ACHAR * const field)
 {
-	assert(m_doc[field].IsBool() && "Field is not BOOL type!!!");
+	assert(g_doc[field].IsBool() && "Field is not BOOL type!!!");
 
-	return m_doc[field].IsTrue();
+	return g_doc[field].IsTrue();
 }
 
 ASTRING	JSONLoader::GetString	(const ACHAR * const field)
 {
-	assert(m_doc[field].IsString() && "Field is not string type!!!");
+	assert(g_doc[field].IsString() && "Field is not string type!!!");
 
-	return m_doc[field].GetString();
+	return g_doc[field].GetString();
 }
 
 AUINT32	JSONLoader::GetAUINT32	(const ACHAR * const field)
 {
-	assert(m_doc[field].IsUint() && "Field is not AUINT32 type!!!");
+	assert(g_doc[field].IsUint() && "Field is not AUINT32 type!!!");
 
-	return m_doc[field].GetUint();
+	return g_doc[field].GetUint();
 }
 
 AUINT64	JSONLoader::GetAUINT64	(const ACHAR * const field)
 {
-	assert(m_doc[field].IsUint64() && "Field is not AUINT64 type!!!");
+	assert(g_doc[field].IsUint64() && "Field is not AUINT64 type!!!");
 
-	return m_doc[field].GetUint64();
+	return g_doc[field].GetUint64();
 }
 
 AINT32	JSONLoader::GetAINT32	(const ACHAR * const field)
 {
-	assert(m_doc[field].IsInt() && "Field is not AINT32 type!!!");
+	assert(g_doc[field].IsInt() && "Field is not AINT32 type!!!");
 
-	return m_doc[field].GetInt();
+	return g_doc[field].GetInt();
 }
 
 AINT64	JSONLoader::GetAINT64	(const ACHAR * const field)
 {
-	assert(m_doc[field].IsInt64() && "Field is not AINT64 type!!!");
+	assert(g_doc[field].IsInt64() && "Field is not AINT64 type!!!");
 
-	return m_doc[field].GetInt64();
+	return g_doc[field].GetInt64();
 }
 
 AREAL32	JSONLoader::GetAREAL32	(const ACHAR * const field)
 {
-	assert(m_doc[field].IsDouble() && "Field is not AREAl32 type!!!");
+	assert(g_doc[field].IsDouble() && "Field is not AREAl32 type!!!");
 
-	return static_cast<AREAL32>(m_doc[field].GetDouble());
+	return static_cast<AREAL32>(g_doc[field].GetDouble());
 }
 
 AREAL64	JSONLoader::GetAREAL64	(const ACHAR * const field)
 {
-	assert(m_doc[field].IsDouble() && "Field is not AREAL64 type!!!");
+	assert(g_doc[field].IsDouble() && "Field is not AREAL64 type!!!");
 
-	return m_doc[field].GetDouble();
+	return g_doc[field].GetDouble();
 }
