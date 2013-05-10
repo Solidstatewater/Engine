@@ -17,6 +17,7 @@ namespace Anubis
 	private:
 		//static rapidjson::Document m_doc;
 		//static rapidjson::GenericDocument<struct rapidjson::UTF8<char>, class rapidjson::MemoryPoolAllocator<class rapidjson::CrtAllocator> > m_doc;
+		//static rapidjson::Value m_array;
 
 	public:
 		//Parse document or string with JSON format
@@ -32,5 +33,21 @@ namespace Anubis
 		static AINT64	GetAINT64	(const ACHAR * const field);
 		static AREAL32	GetAREAL32	(const ACHAR * const field);
 		static AREAL64	GetAREAL64	(const ACHAR * const field); 
+
+		/***	Array parsing	***/
+		static AVOID	ParseArray	(const ACHAR * const field);
+
+		//Access info about array
+		static AUINT32	ArraySize();
+
+		//Access array data
+		static ABOOL	GetBoolFromArray	(const AINT32 index);
+		static ASTRING	GetStringFromArray	(const AINT32 index);
+		static AUINT32	GetAUINT32FromArray	(const AINT32 index);
+		static AUINT64	GetAUINT64FromArray	(const AINT32 index);
+		static AINT32	GetAINT32FromArray	(const AINT32 index);
+		static AINT64	GetAINT64FromArray	(const AINT32 index);
+		static AREAL32	GetAREAL32FromArray	(const AINT32 index);
+		static AREAL64	GetAREAL64FromArray	(const AINT32 index); 
 	};
 }; //Anubis

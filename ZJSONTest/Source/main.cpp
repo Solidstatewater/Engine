@@ -33,5 +33,13 @@ int main()
 	cout << "speed: "		<< JSONLoader::GetAREAL32("speed")		<< endl;
 	cout << "active: "		<< JSONLoader::GetBool("active")		<< endl;
 
+	//try to parse array ^^
+	JSONLoader::ParseArray("weapons");
+
+	cout << "Number of weapons: "	<< JSONLoader::ArraySize()	<< endl;
+
+	cout << "first weapon: "	<< JSONLoader::GetStringFromArray(0)	<< endl;
+	cout << "second weapon: "	<< JSONLoader::GetStringFromArray(1)	<< endl;
+
 	system("pause");
 }
