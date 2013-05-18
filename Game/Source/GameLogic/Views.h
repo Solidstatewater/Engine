@@ -9,6 +9,7 @@
 
 #include "Renderer.h"
 #include "Messenger.h"
+#include "Widget.h"
 
 namespace Anubis
 {
@@ -21,7 +22,7 @@ namespace Anubis
 		AVIRTUAL ABOOL		VRestore()											= 0;
 		AVIRTUAL AVOID		VUpdate(AUINT32 const deltaMilliseconds)			= 0;
 		AVIRTUAL AVOID		VRender(AREAL64 r64Time, AREAL64 r64ElapsedTime)	= 0;
-		AVIRTUAL LRESULT	VMsgProc(AppMsg & msg)								= 0;
+		AVIRTUAL ABOOL	VMsgProc(SystemMessage & msg)						= 0;
 
 		AVIRTUAL	AVOID	  VSetCamera(CameraPtr pCamera) = 0;
 		AVIRTUAL	CameraPtr VGetCamera() const = 0;
@@ -40,7 +41,13 @@ namespace Anubis
 		AVIRTUAL ABOOL		VRestore();
 		AVIRTUAL AVOID		VUpdate(AUINT32 const deltaMilliseconds);
 		AVIRTUAL AVOID		VRender(AREAL64 r64Time, AREAL64 r64ElapsedTime);
-		AVIRTUAL LRESULT	VMsgProc(AppMsg & msg);
+		AVIRTUAL ABOOL		VMsgProc(SystemMessage & msg);
+
+	protected:
+		/* ==================================
+		//	Widgets
+		=================================== */
+		Widgets m_widgets;
 
 		/* ==================================
 		// Game Rendering
@@ -50,6 +57,13 @@ namespace Anubis
 
 		ALIGN16 AREAL32 bgColor[4];
 
+	public:
+
+		//Widgets
+		AVIRTUAL AVOID AddWidget(WidgetPtr pWidget);
+		AVIRTUAL ABOOL RemoveWidget(WidgetPtr pWidget);
+
+		//Game Rendering
 		AVIRTUAL AVOID VSetCamera(CameraPtr pCamera);
 		AVIRTUAL CameraPtr VGetCamera() const { return m_pCamera; }
 		AVIRTUAL ABOOL VHasCamera() const { return m_bHasCamera; }

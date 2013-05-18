@@ -144,6 +144,23 @@ LRESULT CALLBACK Engine::WndProc(HWND hwnd, AUINT32 msg, WPARAM wParam, LPARAM l
 		lParam);
 }
 
+ABOOL Engine::MsgProc(SystemMessage & message)
+{
+	switch (message.m_type)
+	{
+		case SMT_KeyDown:
+		case SMT_KeyUp:
+		case SMT_LMouseDown:
+		case SMT_LMouseUp:
+		case SMT_RMouseDown:
+		case SMT_RMouseUp:
+		{
+			return m_pGame->VMsgProc(message);
+		}
+		break;
+}
+
+
 AVOID Engine::Update(AREAL64 r64Time, AREAL64 r64ElapsedTime)
 {
 	//If we are in quitting state
@@ -179,7 +196,7 @@ AINT32 Engine::Run()
 			/*********************************
 			Application received quit message!
 			*********************************/
-			if (msg.message == WM_SYSCOMMAND)
+			/*if (msg.message == WM_SYSCOMMAND)
 			{
 				if (msg.wParam == SC_CLOSE)
 				{
@@ -205,9 +222,42 @@ AINT32 Engine::Run()
 				{
 					m_bQuitting = !m_bQuitting;
 				}
-			}
+			} */
+
+			//Generate system message
+			switch (msg.message)
+			{
+			case WM_QUIT:
+				m_messageQueue.push(QuitMessage());
+				break;
+			case WM_KEYDOWN:
+				m_messageQueue.push(KeyDownMessage(msg.wParam);
+				break;
+			case WM_KEYUP:
+				m_messageQueue.push(KeyUpMessage(msg.wParam);
+				break;
+			case WM_RBUTTONDOWN:
+				m_messageQueue.push(RMouseDownMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				break;
+			case WM_RBUTTONUP:
+				m_messageQueue.push(RMouseUpMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				break;
+			case WM_LBUTTONDOWN:
+				m_messageQueue.push(LMouseDownMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				break;
+			case WM_LBUTTONUP:
+				m_messageQueue.push(LMouseUpMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				break;
+			};
+
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
+			while (m_messageQueue.size())
+			{
+				MsgProc(m_messagePump.front());
+				m_messagePump.pop();
+			};
 		}
 		else
 		{

@@ -8,6 +8,8 @@
 #include "../../../Physics/Source/PhysicsInterface.h"
 #include "../../../Game/Source/GameLogic/Game.h"
 
+#include "Messages.h"
+
 namespace Anubis
 {
 	class Engine
@@ -36,7 +38,7 @@ namespace Anubis
 		//Win32 stuff
 		ASTATIC LRESULT ACALLBACK WndProc(HWND hwnd, AUINT32 msg, WPARAM wParam, LPARAM lParam);
 
-		LRESULT MsgProc(HWND hwnd, AUINT32 msg, WPARAM wParam, LPARAM lParam);
+		ABOOL MsgProc(SystemMessage & message);
 
 		AVOID Update(AREAL64 r64Time, AREAL64 r64ElapsedTime);
 		AVOID Render(AREAL64 r64Time, AREAL64 r64ElapsedTime);
@@ -73,6 +75,10 @@ namespace Anubis
 		=============================================*/
 		//AVIRTUAL Game* VCreateGame() = 0;
 		//AVIRTUAL AVOID RegisterGameSpecificEvents() = 0;
+
+	private:
+		//engine own message queue - for cross-platform support
+		AQUEUE	m_messageQueue; 
 
 	protected:
 		/* Application data */

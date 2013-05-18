@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Allocator.h" />
+    <ClInclude Include="Source\Memory.h" />
     <ClInclude Include="Source\Memory_pch.h" />
   </ItemGroup>
   <ItemGroup>

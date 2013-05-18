@@ -15,7 +15,7 @@
 namespace Anubis
 {
 	class Renderer;
-	class Mesh
+	class ALIGN16 Mesh 
 	{
 	private:
 		Mat4x4			m_objectTransform;

@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Memory_pch.h" />
     <ClInclude Include="Source\Allocator.h" />
+    <ClInclude Include="Source\Memory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Memory.cpp" />

@@ -34,3 +34,5 @@ public:
 	AVIRTUAL ABOOL VOnKeyDown(Key const key)	= 0;
 	AVIRTUAL ABOOL VOnKeyUp(Key const key)		= 0;
 };
+
+// ================= Joystick ================= //
