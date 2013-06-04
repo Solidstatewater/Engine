@@ -26,7 +26,7 @@ ABOOL Game::VInitialize()
 	return true;
 }
 
-LRESULT	Game::VMsgProc(AppMsg & msg)
+LRESULT	Game::VMsgProc(SystemMessage & msg)
 {
 	return 1;
 }
@@ -120,7 +120,7 @@ AVOID Game::VRender(Renderer * pRenderer, AREAL64 r64Time, AREAL64 r64ElapsedTim
 {
 	//render current game state
 	for (Views::iterator iter = m_views.begin(); iter != m_views.end(); iter++)
-		(*iter)->VRender(r64Time, r64ElapsedTime);
+		(*iter)->VRender(pRenderer, r64Time, r64ElapsedTime);
 
 	//render a game state
 	m_pStateMachine->VRender(this, pRenderer, r64Time, r64ElapsedTime);

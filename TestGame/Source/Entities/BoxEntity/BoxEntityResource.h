@@ -1,6 +1,6 @@
 #pragma once
 //========================================================================
-// CubeEntityResource.h
+// BoxEntityResource.h
 //
 // This code is part of Minotower Games Engine 1.0v
 //
@@ -16,10 +16,11 @@ struct ALIGN16 BoxEntityResource : public EntityResource
 	AREAL	m_r32Y;
 	AREAL	m_r32Z;
 
-	BoxEntityResource() : EntityResource(),
-		m_r32X(5.0f), m_r32Y(5.0f), m_r32Z(5.0f) 
+	BoxEntityResource() : EntityResource()
 	{
 	}
+
+	AVOID VLoad(const ASTRING & filename);
 
 	~BoxEntityResource() {}
 

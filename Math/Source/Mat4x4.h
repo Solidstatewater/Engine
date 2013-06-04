@@ -29,10 +29,10 @@ namespace Anubis
 		ASTATIC Mat4x4 Identity()
 		{
 			Mat4x4 mat;
-			mat.Init(	Vector(1, 0, 0, 0),
-						Vector(0, 1, 0, 0),
+			mat.Init(	Vector(0, 0, 0, 1),
 						Vector(0, 0, 1, 0),
-						Vector(0, 0, 0, 1)	); //create identity matrix
+						Vector(0, 1, 0, 0),
+						Vector(1, 0, 0, 0)	); //create identity matrix
 	
 			return mat;
 		}
@@ -42,10 +42,10 @@ namespace Anubis
 											**/
 		Mat4x4()
 		{
-			rows[0] = _mm_set_ps(1, 0, 0, 0);
-			rows[1] = _mm_set_ps(0, 1, 0, 0);
-			rows[2] = _mm_set_ps(0, 0, 1, 0);
-			rows[3] = _mm_set_ps(0, 0, 0, 1);
+			rows[0] = _mm_set_ps(0, 0, 0, 1);
+			rows[1] = _mm_set_ps(0, 0, 1, 0);
+			rows[2] = _mm_set_ps(0, 1, 0, 0);
+			rows[3] = _mm_set_ps(1, 0, 0, 0);
 		}
 
 		ABOOL Init(	Vec & v0,

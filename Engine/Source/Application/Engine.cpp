@@ -158,8 +158,8 @@ ABOOL Engine::MsgProc(SystemMessage & message)
 			return m_pGame->VMsgProc(message);
 		}
 		break;
+	};
 }
-
 
 AVOID Engine::Update(AREAL64 r64Time, AREAL64 r64ElapsedTime)
 {
@@ -226,27 +226,28 @@ AINT32 Engine::Run()
 
 			//Generate system message
 			switch (msg.message)
-			{
+			{                                                                                                                                                                                                                                                                 
 			case WM_QUIT:
-				m_messageQueue.push(QuitMessage());
-				break;
+				//m_messageQueue.push(QuitMessage());
+				Close();
+				return msg.wParam;
 			case WM_KEYDOWN:
-				m_messageQueue.push(KeyDownMessage(msg.wParam);
+				m_messageQueue.push(KeyDownMessage(msg.wParam));
 				break;
 			case WM_KEYUP:
-				m_messageQueue.push(KeyUpMessage(msg.wParam);
+				m_messageQueue.push(KeyUpMessage(msg.wParam));
 				break;
 			case WM_RBUTTONDOWN:
-				m_messageQueue.push(RMouseDownMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				m_messageQueue.push(RMouseDownMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			case WM_RBUTTONUP:
-				m_messageQueue.push(RMouseUpMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				m_messageQueue.push(RMouseUpMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			case WM_LBUTTONDOWN:
-				m_messageQueue.push(LMouseDownMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				m_messageQueue.push(LMouseDownMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			case WM_LBUTTONUP:
-				m_messageQueue.push(LMouseUpMessage(GET_X_PARAM(msg.lParam), GET_Y_PARAM(msg.lParam)));
+				m_messageQueue.push(LMouseUpMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			};
 
@@ -255,8 +256,8 @@ AINT32 Engine::Run()
 
 			while (m_messageQueue.size())
 			{
-				MsgProc(m_messagePump.front());
-				m_messagePump.pop();
+				MsgProc(m_messageQueue.front());
+				m_messageQueue.pop();
 			};
 		}
 		else

@@ -21,9 +21,12 @@ namespace Anubis
 
 	public:
 		//constructor
-		DynamicRepresentation(EntityRepresentationId id) : EntityRepresentation(id)
+		DynamicRepresentation(EntityRepresentationId id, const float3 & f3Size) : EntityRepresentation(id, f3Size)
 		{
 		}
+
+		//set current and previous matrices to initial state
+		AVOID SetBothTransforms(Mat4x4 & mat, AREAL64 r64CurrentTime);
 
 	protected:
 

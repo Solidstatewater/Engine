@@ -8,8 +8,6 @@
 #include "../../../Physics/Source/PhysicsInterface.h"
 #include "../../../Game/Source/GameLogic/Game.h"
 
-#include "Messages.h"
-
 namespace Anubis
 {
 	class Engine
@@ -62,6 +60,12 @@ namespace Anubis
 		=============================================*/
 		AVOID Close();
 
+		/*============================================
+		//Access Data
+		=============================================*/
+		AREAL64 GameTimeInSeconds() const		{ return m_pTimer->GetGameTimeSeconds(); }
+		AREAL64 CurrentTimeInSeconds() const	{ return m_pTimer->GetCurrentTimeSeconds(); }
+
 		/*
 		ASTATIC LRESULT	ACALLBACK OnMsgProc(HWND hWnd, AUINT32 msg, WPARAM wParam, LPARAM lParam, ABOOL* pbNoFurtherProcessing, APVOID puserContext);
 		ASTATIC AVOID	ACALLBACK OnUpdate(AREAL64 fTime, AREAL32 fElapsedTime, APVOID pUserContext);
@@ -78,7 +82,7 @@ namespace Anubis
 
 	private:
 		//engine own message queue - for cross-platform support
-		AQUEUE	m_messageQueue; 
+		AQUEUE<SystemMessage>	m_messageQueue; 
 
 	protected:
 		/* Application data */

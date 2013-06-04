@@ -7,6 +7,7 @@
 // (c) Copyright 2012 Muralev Evgeny
 //========================================================================
 
+#include "../../../Math/Source/Vectors.h"
 #include "../../../Math/Source/Mat4x4.h"
 #include "Renderer.h"
 
@@ -42,9 +43,14 @@ namespace Anubis
 		Meshes	m_meshes;
 		Lights	m_lights;
 
+		// ======= Visibility Determination ======= //
+		float3	m_f3Size;
+
 	public:
 		//Constructor
-		EntityRepresentation(EntityRepresentationId id) : m_id(id), m_r64LastUpdate(0.0) {}
+		EntityRepresentation(EntityRepresentationId id) : m_id(id), m_r64LastUpdate(0.0) { m_f3Size = float3(0.0f, 0.0f, 0.0f); }
+		EntityRepresentation(EntityRepresentationId id, const float3 & f3Size )
+			: m_id(id), m_r64LastUpdate(0.0) { m_f3Size = f3Size; }
 		~EntityRepresentation();
 
 		//Add and remove children
@@ -70,6 +76,12 @@ namespace Anubis
 		//		Mutators	  //
 		//	================  //
 		AVOID SetCurrentTransform(Mat4x4 & mat, AREAL64 r64CurrentTime);
+		AVOID SetSize(const AREAL sizex, const AREAL sizey, const AREAL sizez)
+		{
+			m_f3Size.x = sizex;
+			m_f3Size.y = sizey;
+			m_f3Size.z = sizez;
+		}
 
 	protected:
 

@@ -12,7 +12,7 @@
 
 #include "Renderer.h"
 
-BoxMesh::BoxMesh(ASTRING fileName)
+BoxMesh::BoxMesh(ASTRING fileName, AREAL scalex, AREAL scaley, AREAL scalez)
 {
 	//Initialize buffers
 	m_pVertices = new VertexBuffer();
@@ -31,53 +31,53 @@ BoxMesh::BoxMesh(ASTRING fileName)
 	#pragma region Positions
 	float3 pos [] = 
 	{
-		float3(-1.0f, 1.0f, -1.0f),
-		float3(1.0f, 1.0f, -1.0f),
-		float3(-1.0f, -1.0f, -1.0f),
+		float3(-0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
+		float3(-0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
 
-		float3(-1.0f, -1.0f, -1.0f),
-		float3(1.0f, 1.0f, -1.0f),
-		float3(1.0f, -1.0f, -1.0f),
+		float3(-0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
 		
-		float3(1.0f, 1.0f, -1.0f),
-		float3(1.0f, 1.0f, 1.0f),
-		float3(1.0f, -1.0f, -1.0f),
+		float3(0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
 		
-		float3(1.0f, -1.0f, -1.0f),
-		float3(1.0f, 1.0f, 1.0f),
-		float3(1.0f, -1.0f, 1.0f),
+		float3(0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
 		
-		float3(1.0f, 1.0f, 1.0f),
-		float3(-1.0f, 1.0f, 1.0f),
-		float3(1.0f, -1.0f, 1.0f),
+		float3(0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(-0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
 		
-		float3(1.0f, -1.0f, 1.0f),
-		float3(-1.0f, 1.0f, 1.0f),
-		float3(-1.0f, -1.0f, 1.0f),
+		float3(0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
+		float3(-0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(-0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
 		
-		float3(-1.0f, 1.0f, 1.0f),
-		float3(-1.0f, 1.0f, -1.0f),
-		float3(-1.0f, -1.0f, 1.0f),
+		float3(-0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(-0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
+		float3(-0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
 		
-		float3(-1.0f, -1.0f, 1.0f),
-		float3(-1.0f, 1.0f, -1.0f),
-		float3(-1.0f, -1.0f, -1.0f),
+		float3(-0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
+		float3(-0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
+		float3(-0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
 		
-		float3(-1.0f, 1.0f, 1.0f),
-		float3(1.0f, 1.0f, 1.0f),
-		float3(-1.0f, 1.0f, -1.0f),
+		float3(-0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(-0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
 		
-		float3(-1.0f, 1.0f, -1.0f),
-		float3(1.0f, 1.0f, 1.0f),
-		float3(1.0f, 1.0f, -1.0f),
+		float3(-0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, 0.5f*scaley, 0.5f*scalez),
+		float3(0.5f*scalex, 0.5f*scaley, -0.5f*scalez),
 		
-		float3(-1.0f, -1.0f, -1.0f),
-		float3(1.0f, -1.0f, -1.0f),
-		float3(-1.0f, -1.0f, 1.0f),
+		float3(-0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
+		float3(-0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
 		
-		float3(-1.0f, -1.0f, 1.0f),
-		float3(1.0f, -1.0f, -1.0f),
-		float3(1.0f, -1.0f, 1.0f),
+		float3(-0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
+		float3(0.5f*scalex, -0.5f*scaley, -0.5f*scalez),
+		float3(0.5f*scalex, -0.5f*scaley, 0.5f*scalez),
 	};
 
 	params.SetSize(sizeof(float3) * 36);
@@ -181,57 +181,6 @@ BoxMesh::BoxMesh(ASTRING fileName)
 		normalData[i*3].tangent = tangent;
 		normalData[i*3].binormal = binormal;
 	}
-	/*
-	float3 normalData[] =
-	{
-		float3(0.0f, 0.0f, -1.0f),
-		float3(0.0f, 0.0f, -1.0f),
-		float3(0.0f, 0.0f, -1.0f),
-
-		float3(0.0f, 0.0f, -1.0f),
-		float3(0.0f, 0.0f, -1.0f),
-		float3(0.0f, 0.0f, -1.0f),
-		
-		float3(1.0f, 0.0f, 0.0f),
-		float3(1.0f, 0.0f, 0.0f),
-		float3(1.0f, 0.0f, 0.0f),
-		
-		float3(1.0f, 0.0f, 0.0f),
-		float3(1.0f, 0.0f, 0.0f),
-		float3(1.0f, 0.0f, 0.0f),
-		
-		float3(0.0f, 0.0f, 1.0f),
-		float3(0.0f, 0.0f, 1.0f),
-		float3(0.0f, 0.0f, 1.0f),
-		
-		float3(0.0f, 0.0f, 1.0f),
-		float3(0.0f, 0.0f, 1.0f),
-		float3(0.0f, 0.0f, 1.0f),
-		
-		float3(-1.0f, 0.0f, 0.0f),
-		float3(-1.0f, 0.0f, 0.0f),
-		float3(-1.0f, 0.0f, 0.0f),
-		
-		float3(-1.0f, 0.0f, 0.0f),
-		float3(-1.0f, 0.0f, 0.0f),
-		float3(-1.0f, 0.0f, 0.0f),
-		
-		float3(0.0f, 1.0f, 0.0f),
-		float3(0.0f, 1.0f, 0.0f),
-		float3(0.0f, 1.0f, 0.0f),
-		
-		float3(0.0f, 1.0f, 0.0f),
-		float3(0.0f, 1.0f, 0.0f),
-		float3(0.0f, 1.0f, 0.0f),
-		
-		float3(0.0f, -1.0f, 0.0f),
-		float3(0.0f, -1.0f, 0.0f),
-		float3(0.0f, -1.0f, 0.0f),
-		
-		float3(0.0f, -1.0f, 0.0f),
-		float3(0.0f, -1.0f, 0.0f),
-		float3(0.0f, -1.0f, 0.0f),
-	}; */
 
 	params.SetSize(sizeof(NormalData) * 36);
 	data.SetData(normalData);

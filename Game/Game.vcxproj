@@ -79,7 +79,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>Game_pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>Game_pch.pch</PrecompiledHeaderOutputFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Messenger\Source;$(SolutionDir)Scene\Source;$(SolutionDir)Physics\Source;$(SolutionDir)Renderer\Source;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Definitions\Source;$(SolutionDir)Graphics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ThirdParty\include\;$(SolutionDir)FileStream\Source;$(SolutionDir)Messenger\Source;$(SolutionDir)Scene\Source;$(SolutionDir)Physics\Source;$(SolutionDir)Renderer\Source;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Definitions\Source;$(SolutionDir)Graphics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -96,7 +96,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>Game_pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>Game_pch.pch</PrecompiledHeaderOutputFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Messenger\Source;$(SolutionDir)Scene\Source;$(SolutionDir)Physics\Source;$(SolutionDir)Renderer\Source;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Definitions\Source;$(SolutionDir)Graphics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ThirdParty\include\;$(SolutionDir)FileStream\Source;$(SolutionDir)Messenger\Source;$(SolutionDir)Scene\Source;$(SolutionDir)Physics\Source;$(SolutionDir)Renderer\Source;D:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Definitions\Source;$(SolutionDir)Graphics\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

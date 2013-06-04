@@ -29,6 +29,7 @@ namespace Anubis
 		EntityId	m_id;
 
 		EntityResource(EntityId id = 0) : m_id(id)	{}
+		AVIRTUAL AVOID VLoad(const ASTRING & filename);
 		AVIRTUAL ~EntityResource()	{}
 
 		//	 =====================	 //

@@ -140,3 +140,23 @@ AVOID PlayerView::VSetCamera(CameraPtr pCamera)
 	m_pCamera = pCamera;
 	m_bHasCamera = true;
 }
+
+AVOID PlayerView::AddWidget(WidgetPtr pWidget)
+{
+	m_widgets.push_back(pWidget);
+}
+
+ABOOL PlayerView::RemoveWidget(WidgetPtr pWidget)
+{
+	for( Widgets::iterator it = m_widgets.begin(); it != m_widgets.end(); it++)
+	{
+		if ((*it) == pWidget)
+		{
+			m_widgets.erase(it);
+			return true;
+		}
+	}
+	
+	return false;
+	//assert(0 && "No such widget was found!!!");
+}

@@ -5,6 +5,8 @@
 #include "../../Entities/BoxEntity/BoxEntity.h"
 #include "../../Entities/BoxEntity/BoxEntityRepresentation.h"
 
+#include "../../Entities/PlaneEntity/PlaneEntity.h"
+
 #include "../../Entities/PointLightEntity/PointLightEntityResource.h"
 #include "../../Entities/PointLightEntity/PointLightEntity.h"
 #include "../../Entities/PointLightEntity/PointLightEntityRepresentation.h"
@@ -20,8 +22,20 @@ AVOID GameTestState::VInitialize( Game * pGame, AUINTPTR uptrData)
 
 	//create resource
 	BoxEntityResource & box_params = BoxEntityResource();
+	box_params.VLoad("Resources\\JSON\\box1_params.json");
 	EntityPtr pBox = pGame->VAddEntity(box_params.VCreateEntity(pGame));
 	box_params.VCreateRepresentation(m_pScene, pBox);
+
+	//create second box 
+	box_params.VLoad("Resources\\JSON\\box2_params.json");
+	pBox = pGame->VAddEntity(box_params.VCreateEntity(pGame));
+	box_params.VCreateRepresentation(m_pScene, pBox);
+
+	//create back wall
+	PlaneEntityResource & plane_params = PlaneEntityResource();
+	plane_params.VLoad("Resources\\JSON\\wall1_params.json");
+	EntityPtr pPlane =  pGame->VAddEntity(plane_params.VCreateEntity(pGame));
+	plane_params.VCreateRepresentation(m_pScene, pPlane);
 
 	//add point light
 	PointLightEntityResource & light_params = PointLightEntityResource();

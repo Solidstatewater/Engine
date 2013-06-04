@@ -14,5 +14,5 @@ class BoxEntityRepresentation : public DynamicRepresentation
 public:
 	//constructor
 	BoxEntityRepresentation(EntityRepresentationId id, AWSTRING diffuseMaterialFile, AWSTRING normalMaterialFile,
-							AWSTRING specularMaterialFile, AWSTRING heightMaterialFile);
+							AWSTRING specularMaterialFile, AWSTRING heightMaterialFile, const float3 & f3Size);
 };

@@ -59,13 +59,14 @@ namespace Anubis
 		//send message to the handlers
 		ABOOL SendMessageInternal(Message const & msg);
 
+		//handle all events
 	private:
 
 		/** =========================================== **/
 		//		Global methods for message-handling		 //
 		//												 //
 		//	 These are external methods (basically -	 //
-		//   wrappers arounnd !Internal! methods) and	 //
+		//   wrappers around !Internal! methods) and	 //
 		//	 make needed assertions to safely use them   //
 		//	 throught the code.							 //
 		//												 //	

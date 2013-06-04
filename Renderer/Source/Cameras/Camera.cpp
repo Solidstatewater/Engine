@@ -34,7 +34,7 @@ AVOID Camera::UpdateTransforms()
 	m_lookAt = m_pos + m_dir * rot;
 
 	//calculate view and projection matrices
-	m_view			= CreateViewMatrixLH(m_pos, m_lookAt, m_up);
+	m_view			= CreateViewMatrixLH(m_pos, m_dir, m_up);
 	m_projection	= CreatePerspectiveProjectionLH(	m_frustum.GetFOV(), m_frustum.GetAspectRatio(),
 														m_frustum.GetNearZ(), m_frustum.GetFarZ() );
 }

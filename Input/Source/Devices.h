@@ -7,20 +7,23 @@
 // (c) Copyright 2012 Muralev Evgeny
 //========================================================================
 
+#include "Defines.h"
+#include "../../Math/Source/Math.h"
+
 // ================= Mouse ================= //
 class IMouseHandler
 {
 public:
 	//left mouse button
-	AVIRTUAL ABOOL VOnLButtonDown(const CPoint & mousePos)	= 0;
-	AVIRTUAL ABOOL VOnLButtonUp(const CPoint & mousePos)	= 0;
+	AVIRTUAL ABOOL VOnLButtonDown(const AREAL & x, const AREAL & y)	= 0;
+	AVIRTUAL ABOOL VOnLButtonUp(const AREAL & x, const AREAL & y)	= 0;
 
 	//right mouse button
-	AVIRTUAL ABOOL VOnRButtonDown(const CPoint & mousePos)	= 0;
-	AVIRTUAL ABOOL VOnRButtonUp(const CPoint & mousePos)	= 0;
+	AVIRTUAL ABOOL VOnRButtonDown(const AREAL & x, const AREAL & y)	= 0;
+	AVIRTUAL ABOOL VOnRButtonUp(const AREAL & x, const AREAL & y)	= 0;
 
 	//mouse move
-	AVIRTUAL ABOOL VOnMouseMove(const CPoint & mousePos)	= 0;
+	AVIRTUAL ABOOL VOnMouseMove(const AREAL & x, const AREAL & y)	= 0;
 };
 
 // ================= Keyboard ================= //

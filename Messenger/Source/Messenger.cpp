@@ -120,7 +120,7 @@ ABOOL Messenger::StopHandlingInternal(MessageHandler const * const pHandler, Mes
 		}
 	}
 
-	ASSERT(0 && "Such message tyope is not registered!");
+	ASSERT(0 && "Such message type is not registered!");
 	return true;
 }
 

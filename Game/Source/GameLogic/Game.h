@@ -65,7 +65,7 @@ namespace Anubis
 		/*==
 		//App stuff
 		==*/
-		AVIRTUAL LRESULT	VMsgProc(AppMsg & msg);
+		AVIRTUAL LRESULT	VMsgProc(SystemMessage & msg);
 
 		/*==
 		//Updating methods

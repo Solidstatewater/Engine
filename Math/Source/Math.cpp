@@ -51,9 +51,9 @@ AREAL Anubis::Dot(const Vec& v1, const Vec& v2)
 	return getx(_mm_add_ps(w, _mm_add_ps(_mm_add_ps(z, y), x)));
 }
 
-Vec Anubis::Normalize(const Vec& v)
+Vec Anubis::Normalize(const Vec& V)
 {
-	Vec res;
+	/*Vec res;
 
 	__asm
 	{
@@ -71,17 +71,43 @@ Vec Anubis::Normalize(const Vec& v)
 		mulps	xmm0,	xmm2
 		movaps	[eax],	xmm0	
 		mov	res, eax
-	};
+	}; */
+
+	// Perform the dot product on x,y and z only
+    Vec vLengthSq = _mm_mul_ps(V,V);
+    Vec vTemp = _mm_shuffle_ps(vLengthSq,vLengthSq,_MM_SHUFFLE(2,1,2,1));
+    vLengthSq = _mm_add_ss(vLengthSq,vTemp);
+    vTemp = _mm_shuffle_ps(vTemp,vTemp,_MM_SHUFFLE(1,1,1,1));
+    vLengthSq = _mm_add_ss(vLengthSq,vTemp);
+	vLengthSq = _mm_shuffle_ps(vLengthSq,vLengthSq,_MM_SHUFFLE(0,0,0,0));
+    // Prepare for the division
+    Vec vResult = _mm_sqrt_ps(vLengthSq);
+    // Create zero with a single instruction
+    Vec vZeroMask = _mm_setzero_ps();
+    // Test for a divide by zero (Must be FP to detect -0.0)
+    vZeroMask = _mm_cmpneq_ps(vZeroMask,vResult);
+    // Failsafe on zero (Or epsilon) length planes
+    // If the length is infinity, set the elements to zero
+    vLengthSq = _mm_cmpneq_ps(vLengthSq,Vector(0x7F800000, 0x7F800000, 0x7F800000, 0x7F800000));
+    // Divide to perform the normalization
+    vResult = _mm_div_ps(V,vResult);
+    // Any that are infinity, set to zero
+    vResult = _mm_and_ps(vResult,vZeroMask);
+    // Select qnan or result based on infinite length
+	Vec vTemp1 = _mm_andnot_ps(vLengthSq,Vector(0x7FC00000, 0x7FC00000, 0x7FC00000, 0x7FC00000));
+    Vec vTemp2 = _mm_and_ps(vResult,vLengthSq);
+    vResult = _mm_or_ps(vTemp1,vTemp2);
+    return vResult;
 }
 
 /* ======================================
 					Matrices
 	========================================= */
-Mat4x4 Anubis::CreateViewMatrixLH(const Vec & pos, const Vec & lookAt, const Vec & up)
+Mat4x4 Anubis::CreateViewMatrixLH(const Vec & pos, const Vec & lookDir, const Vec & up)
 {
 	Mat4x4 mat;
 
-	Vec & zaxis = Normalize(lookAt - pos);
+	Vec & zaxis = Normalize(lookDir);
 	Vec & xaxis = Normalize(cross(up, zaxis));
 	Vec & yaxis = cross(zaxis, xaxis);
 

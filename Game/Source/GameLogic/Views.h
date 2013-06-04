@@ -11,6 +11,10 @@
 #include "Messenger.h"
 #include "Widget.h"
 
+#include "../../Input/Source/Devices.h"
+
+#include "Anubis.h"
+
 namespace Anubis
 {
 	class IView
@@ -21,8 +25,8 @@ namespace Anubis
 		AVIRTUAL ABOOL		VInit()												= 0;
 		AVIRTUAL ABOOL		VRestore()											= 0;
 		AVIRTUAL AVOID		VUpdate(AUINT32 const deltaMilliseconds)			= 0;
-		AVIRTUAL AVOID		VRender(AREAL64 r64Time, AREAL64 r64ElapsedTime)	= 0;
-		AVIRTUAL ABOOL	VMsgProc(SystemMessage & msg)						= 0;
+		AVIRTUAL AVOID		VRender(Renderer* pRenderer, AREAL64 r64Time, AREAL64 r64ElapsedTime)	= 0;
+		AVIRTUAL ABOOL		VMsgProc(SystemMessage & msg)						= 0;
 
 		AVIRTUAL	AVOID	  VSetCamera(CameraPtr pCamera) = 0;
 		AVIRTUAL	CameraPtr VGetCamera() const = 0;
@@ -32,6 +36,8 @@ namespace Anubis
 	class PlayerView : public IView
 	{
 	protected:
+		IMouseHandler*		m_pMouseHandler;
+		IKeyboardHandler*	m_pKeyboardHandler;
 
 	public:
 		PlayerView() : m_bHasCamera(false) {}
@@ -40,7 +46,7 @@ namespace Anubis
 		AVIRTUAL ABOOL		VInit();
 		AVIRTUAL ABOOL		VRestore();
 		AVIRTUAL AVOID		VUpdate(AUINT32 const deltaMilliseconds);
-		AVIRTUAL AVOID		VRender(AREAL64 r64Time, AREAL64 r64ElapsedTime);
+		AVIRTUAL AVOID		VRender(Renderer* pRenderer, AREAL64 r64Time, AREAL64 r64ElapsedTime);
 		AVIRTUAL ABOOL		VMsgProc(SystemMessage & msg);
 
 	protected:

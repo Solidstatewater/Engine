@@ -36,6 +36,12 @@
     <ClCompile Include="Source\Entities\PointLightEntity\PointLightEntityResource.cpp">
       <Filter>Game\Entities\PointLightEntity</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Meshes\PlaneMesh.cpp">
+      <Filter>Renderer\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\PlaneEntity\PlaneEntity.cpp">
+      <Filter>Game\Entities\PlaneEntity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\TestGame_pch.h" />
@@ -44,9 +50,6 @@
     </ClInclude>
     <ClInclude Include="Source\Game\DemoStateFactory.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\States\GameTestState.h">
-      <Filter>Game\States</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entities\TestEntity.h">
       <Filter>Game\Entities</Filter>
@@ -72,6 +75,15 @@
     <ClInclude Include="Source\Entities\PointLightEntity\PointLightEntityResource.h">
       <Filter>Game\Entities\PointLightEntity</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Game\States\GameTestState.h">
+      <Filter>Game\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Meshes\PlaneMesh.h">
+      <Filter>Renderer\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\PlaneEntity\PlaneEntity.h">
+      <Filter>Game\Entities\PlaneEntity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -94,6 +106,9 @@
     </Filter>
     <Filter Include="Game\Entities\PointLightEntity">
       <UniqueIdentifier>{c2d25620-d9ab-4960-9e7e-22388dfdd7f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\PlaneEntity">
+      <UniqueIdentifier>{9738bf53-5aa5-45f3-ade4-a8bbf8a4a9b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

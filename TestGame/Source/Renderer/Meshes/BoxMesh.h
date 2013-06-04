@@ -12,6 +12,6 @@
 class BoxMesh : public Mesh
 {
 public:
-	BoxMesh(ASTRING fileName);
+	BoxMesh(ASTRING fileName, AREAL scalex = 1.0f, AREAL scaley = 1.0f, AREAL scalez = 1.0f);
 	AVOID VPreRender(Renderer* pRenderer, const Mat4x4 & viewprojection);
 };

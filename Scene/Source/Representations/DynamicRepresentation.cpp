@@ -5,6 +5,13 @@
 
 using namespace Anubis;
 
+AVOID DynamicRepresentation::SetBothTransforms(Mat4x4 & mat, AREAL64 r64CurrentTime)
+{
+	m_prevWorldMatrix = mat;
+	m_currentWorldMatrix = mat;
+	m_r64LastUpdate = r64CurrentTime;
+}
+
 //pre-rendering modifications
 AVOID DynamicRepresentation::VPushParameters(Scene *pScene, AREAL64 r64CurrentTime)
 {

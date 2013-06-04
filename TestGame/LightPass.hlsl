@@ -19,11 +19,11 @@ cbuffer CameraBuffer	:	register( c1 )
 cbuffer LightBuffer	:	register( c2 )
 {
 	//Light Color
-	float3 lightColor;
+	//float3 lightColor;
 	float  lightColorPad;
 
 	//Light Position
-	float3 lightPos;
+	//float3 lightPos;
 	float  lightPosPad;
 
 	//Light Direction
@@ -107,11 +107,13 @@ float3 CalcLightning( in float3 position,
 					  in float3 specular,
 					  in float	specPower )
 {
+	float4 lightColor1 = (float4)1.0f;
+	float3 lightPos = float3(0.0f, 0.0f, -3.0f);
 	//firstly handle diffuse term
 	float3 L = (float3)0.0f;
 	float atten = 1.0f;
 
-	if( POINT_LIGHT() || SPOT_LIGHT() )
+	//if( POINT_LIGHT() || SPOT_LIGHT() )
 	{
 		//calc inverse light direction
 		L = lightPos - position;
@@ -122,13 +124,13 @@ float3 CalcLightning( in float3 position,
 		L /= distance;
 		atten = max(0.0f, 1.0f - (distance / lightRange.x));
 	}
-	else if( DIRECTIONAL_LIGHT() )
-	{
-		L = -lightDir;
-	}
+	//else if( DIRECTIONAL_LIGHT() )
+	//{
+	//	L = -lightDir;
+	//}
 	
 
-	if( SPOT_LIGHT() )
+	/*if( SPOT_LIGHT() )
 	{
 		//dd attenuation for a spot light
 		float3 L2 = lightDir;
@@ -137,20 +139,29 @@ float3 CalcLightning( in float3 position,
 		float angle = acos(dot(-L, L2));
 		atten *= ( (angle - spotLightAngles.y) /(spotLightAngles.x - spotLightAngles.y) );
 	}
-
+	*/
 	float normalDotL = saturate(dot(normal, L));
-	float3 finalDiffuse = diffuse * lightColor * normalDotL;
+	float3 finalDiffuse = diffuse * lightColor1 * normalDotL;
 
-	//float3 camera = float3(0.0f, 0.0f, -3.0f);
+	float3 camera = float3(0.0f, 0.0f, -3.0f);
 	//now handle specular term
 	float3 V = cameraPos - position; //view vector
 	float3 H = normalize( L + V );
-	float3 finalSpecular = pow( saturate( dot(normal, H) ), specPower) * lightColor * specular * normalDotL;
+	float3 finalSpecular = pow( saturate( dot(normal, H) ), specPower) * lightColor1 * specular * normalDotL;
 
-	return ( finalDiffuse + finalSpecular) * atten;
+	//return ( finalDiffuse + finalSpecular) * atten;
+	//return finalSpecular * atten;
+	//float3 res = position;
 	//float3 res = normal;
+	//float3 res = diffuse;
+	//float3 res = specular;
 	//float3 res = float3(depth, depth, depth);
-	//return res;
+	//return lightColor;
+	//return float3(normalDotL, normalDotL, normalDotL);
+	//return diffuse * lightColor * float3(1.0f, 0.0f, 0.0f);
+	return finalDiffuse;// * atten;
+	//return diffuse;
+	//return normalDotL;
 }
 
 float4 PS ( float4 screenPos : SV_POSITION ) : SV_Target

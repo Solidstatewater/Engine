@@ -7,6 +7,8 @@
 // (c) Copyright 2012 Muralev Evgeny
 //========================================================================
 
+#include "Anubis.h"
+
 namespace Anubis
 {
 	class Widget
@@ -17,7 +19,7 @@ namespace Anubis
 		AVIRTUAL ABOOL		VMsgProc(SystemMessage & msg)											= 0;
 
 		//To order widgets on the screen
-		AVIRTUAL AVOID		VSetZ(AUINT8 z);														= 0;
+		AVIRTUAL AVOID		VSetZ(AUINT8 z)															= 0;
 		AVIRTUAL AUINT8		VGetZ() const															= 0;
 
 		AVIRTUAL AVOID		VSetVisible(const ABOOL visible)										= 0;
