@@ -34,6 +34,7 @@
     <ClCompile Include="Source\DX11\Stages\Shaders\PixelShaderDX11.cpp" />
     <ClCompile Include="Source\DX11\Stages\Shaders\VertexShaderDX11.cpp" />
     <ClCompile Include="Source\DX11\States\BlendStateDX11.cpp" />
+    <ClCompile Include="Source\DX11\States\DepthStencilStateDX11.cpp" />
     <ClCompile Include="Source\DX11\States\SamplerStateDX11.cpp" />
     <ClCompile Include="Source\Final\General.cpp" />
     <ClCompile Include="Source\Final\Manager.cpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="Source\Final\Resources\Textures\Texture2D.cpp" />
     <ClCompile Include="Source\Final\Resources\Textures\Texture3D.cpp" />
     <ClCompile Include="Source\Final\States\BlendState.cpp" />
+    <ClCompile Include="Source\Final\States\DepthStencilState.cpp" />
     <ClCompile Include="Source\Final\States\SamplerState.cpp" />
     <ClCompile Include="Source\Graphics_pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -95,6 +97,7 @@
     <ClInclude Include="Source\Final\Resources\Views\Views.h" />
     <ClInclude Include="Source\Final\Stages\Shaders\Shaders.h" />
     <ClInclude Include="Source\Final\States\BlendState.h" />
+    <ClInclude Include="Source\Final\States\DepthStencilState.h" />
     <ClInclude Include="Source\Final\States\SamplerState.h" />
     <ClInclude Include="Source\Graphics_pch.h" />
   </ItemGroup>

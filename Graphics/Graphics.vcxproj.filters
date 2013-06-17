@@ -102,6 +102,12 @@
     <ClCompile Include="Source\Final\States\SamplerState.cpp">
       <Filter>Final\States</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DX11\States\DepthStencilStateDX11.cpp">
+      <Filter>DX11\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Final\States\DepthStencilState.cpp">
+      <Filter>Final\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics_pch.h" />
@@ -234,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="Source\DX11\Stages\Shaders\ShaderDX11.h" />
     <ClInclude Include="Source\Final\States\SamplerState.h">
+      <Filter>Final\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Final\States\DepthStencilState.h">
       <Filter>Final\States</Filter>
     </ClInclude>
   </ItemGroup>

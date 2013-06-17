@@ -55,6 +55,10 @@ namespace Anubis
 			ShaderResourceViewDX11
 		#endif
 	{
+	public:
+		#ifdef ADX11_API
+			ShaderResourceView() : ShaderResourceViewDX11() {}
+		#endif
 	};
 
 	class UnorderedAccessView : public
@@ -62,6 +66,10 @@ namespace Anubis
 			UnorderedAccessViewDX11
 		#endif
 	{
+	public:
+		#ifdef ADX11_API
+			UnorderedAccessView() : UnorderedAccessViewDX11() {}
+		#endif
 	};
 
 	class RenderTargetView : public
@@ -73,6 +81,7 @@ namespace Anubis
 		#ifdef ADX11_API
 			RenderTargetView(ID3D11RenderTargetView * const pView)
 				: RenderTargetViewDX11(pView) {}
+			RenderTargetView() : RenderTargetViewDX11() {}
 		#endif 
 	};
 
@@ -81,6 +90,10 @@ namespace Anubis
 			DepthStencilViewDX11
 		#endif
 	{
+	public:
+		#ifdef ADX11_API
+			DepthStencilView() : DepthStencilViewDX11() {}
+		#endif
 	};
 
 	//=======================================//

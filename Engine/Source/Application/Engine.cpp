@@ -144,9 +144,9 @@ LRESULT CALLBACK Engine::WndProc(HWND hwnd, AUINT32 msg, WPARAM wParam, LPARAM l
 		lParam);
 }
 
-ABOOL Engine::MsgProc(SystemMessage & message)
+ABOOL Engine::MsgProc(SystemMessage * message)
 {
-	switch (message.m_type)
+	switch (message->m_type)
 	{
 		case SMT_KeyDown:
 		case SMT_KeyUp:
@@ -232,22 +232,22 @@ AINT32 Engine::Run()
 				Close();
 				return msg.wParam;
 			case WM_KEYDOWN:
-				m_messageQueue.push(KeyDownMessage(msg.wParam));
+				m_messageQueue.push(new KeyDownMessage(msg.wParam));
 				break;
 			case WM_KEYUP:
-				m_messageQueue.push(KeyUpMessage(msg.wParam));
+				m_messageQueue.push(new KeyUpMessage(msg.wParam));
 				break;
 			case WM_RBUTTONDOWN:
-				m_messageQueue.push(RMouseDownMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
+				m_messageQueue.push(new RMouseDownMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			case WM_RBUTTONUP:
-				m_messageQueue.push(RMouseUpMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
+				m_messageQueue.push(new RMouseUpMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			case WM_LBUTTONDOWN:
-				m_messageQueue.push(LMouseDownMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
+				m_messageQueue.push(new LMouseDownMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			case WM_LBUTTONUP:
-				m_messageQueue.push(LMouseUpMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
+				m_messageQueue.push(new LMouseUpMessage(LOWORD(msg.lParam), HIWORD(msg.lParam)));
 				break;
 			};
 
@@ -256,8 +256,11 @@ AINT32 Engine::Run()
 
 			while (m_messageQueue.size())
 			{
-				MsgProc(m_messageQueue.front());
+				SystemMessage *pMsg = m_messageQueue.front();
+				MsgProc(pMsg);
+
 				m_messageQueue.pop();
+				SAFE_DELETE(pMsg);
 			};
 		}
 		else

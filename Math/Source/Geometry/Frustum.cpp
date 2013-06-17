@@ -61,6 +61,9 @@ AVOID Frustum::Init(const AREAL fov, const AREAL aspect, const AREAL nearClip, c
 	m_nearClip[2] = (m_near * g_forward4) + nearRightOffset - nearUpOffset;
 	m_nearClip[3] = (m_near * g_forward4) - nearRightOffset - nearUpOffset;
 
+	m_fNearPlaneWidth = 2 * getx(nearRightOffset);
+	m_fNearPlaneHeight = 2 * gety(nearUpOffset);
+
 	m_farClip[0] = (m_far * g_forward4) - farRightOffset + farUpOffset;
 	m_farClip[1] = (m_far * g_forward4) + farRightOffset + farUpOffset;
 	m_farClip[2] = (m_far * g_forward4) + farRightOffset - farUpOffset;

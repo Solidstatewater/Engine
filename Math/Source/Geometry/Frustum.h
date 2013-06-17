@@ -25,6 +25,9 @@ namespace Anubis
 		AREAL m_near;				// near clipping distance
 		AREAL m_far;				// far clipping distance
 
+		AREAL m_fNearPlaneWidth;
+		AREAL m_fNearPlaneHeight;
+
 	public:
 
 		//constructor
@@ -50,6 +53,8 @@ namespace Anubis
 		const AREAL		GetAspectRatio()	const { return m_aspect; }
 		const AREAL		GetNearZ()			const { return m_near; }
 		const AREAL		GetFarZ()			const { return m_far; }
+		const AREAL		GetNearWidth()		const { return m_fNearPlaneWidth; }
+		const AREAL		GetNearHeight()		const { return m_fNearPlaneHeight; }
 
 		/**
 				Mutators

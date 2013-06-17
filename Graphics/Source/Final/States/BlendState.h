@@ -1,6 +1,6 @@
 #pragma once
 //========================================================================
-// Graphics.h
+// BlendState.h
 //
 // This code is part of Minotower Games Engine 1.0v
 //
@@ -35,5 +35,10 @@ namespace Anubis
 				BlendStateDX11
 			#endif
 		{
+			BlendState()
+#ifdef ADX11_API
+					:		BlendStateDX11()
+#endif											
+			{}
 		};
 }; //Anubis

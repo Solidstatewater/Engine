@@ -36,7 +36,7 @@ namespace Anubis
 		//Win32 stuff
 		ASTATIC LRESULT ACALLBACK WndProc(HWND hwnd, AUINT32 msg, WPARAM wParam, LPARAM lParam);
 
-		ABOOL MsgProc(SystemMessage & message);
+		ABOOL MsgProc(SystemMessage * message);
 
 		AVOID Update(AREAL64 r64Time, AREAL64 r64ElapsedTime);
 		AVOID Render(AREAL64 r64Time, AREAL64 r64ElapsedTime);
@@ -64,7 +64,7 @@ namespace Anubis
 		//Access Data
 		=============================================*/
 		AREAL64 GameTimeInSeconds() const		{ return m_pTimer->GetGameTimeSeconds(); }
-		AREAL64 CurrentTimeInSeconds() const	{ return m_pTimer->GetCurrentTimeSeconds(); }
+//		AREAL64 CurrentTimeInSeconds() const	{ return m_pTimer->GetCurrentTimeSeconds(); }
 
 		/*
 		ASTATIC LRESULT	ACALLBACK OnMsgProc(HWND hWnd, AUINT32 msg, WPARAM wParam, LPARAM lParam, ABOOL* pbNoFurtherProcessing, APVOID puserContext);
@@ -82,7 +82,7 @@ namespace Anubis
 
 	private:
 		//engine own message queue - for cross-platform support
-		AQUEUE<SystemMessage>	m_messageQueue; 
+		AQUEUE<SystemMessage*>	m_messageQueue; 
 
 	protected:
 		/* Application data */

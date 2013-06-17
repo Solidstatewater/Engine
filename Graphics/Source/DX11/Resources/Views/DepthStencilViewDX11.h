@@ -23,7 +23,7 @@ namespace Anubis
 		ID3D11DepthStencilView*	m_pView;
 
 	public:
-		DepthStencilViewDX11() {}
+		DepthStencilViewDX11() { m_pView = NULL; }
 		~DepthStencilViewDX11() { SAFE_RELEASE(m_pView); }
 	};
 }; //Anubis

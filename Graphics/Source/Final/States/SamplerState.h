@@ -28,5 +28,11 @@ namespace Anubis
 				SamplerStateDX11
 			#endif
 		{
+		public:
+			SamplerState()
+#ifdef ADX11_API
+			:	SamplerStateDX11()
+#endif
+			{}
 		};
 }; //Anubis

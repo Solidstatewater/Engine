@@ -42,37 +42,30 @@ AREAL64 Anubis::Sqrt	(AREAL64 x) { return sqrt(x); }
 	========================================= */
 AREAL Anubis::Dot(const Vec& v1, const Vec& v2)
 {
-	Vec res = _mm_mul_ps(v1, v2);
-	Vec x = _mm_replicate_x_ps(res);
-	Vec y = _mm_replicate_y_ps(res);
-	Vec z = _mm_replicate_z_ps(res);
-	Vec w = _mm_replicate_w_ps(res);
+	#ifdef SIMD_MATH_ENABLED
+		Vec res = _mm_mul_ps(v1, v2);
+		Vec x = _mm_replicate_x_ps(res);
+		Vec y = _mm_replicate_y_ps(res);
+		Vec z = _mm_replicate_z_ps(res);
+		Vec w = _mm_replicate_w_ps(res);
 
-	return getx(_mm_add_ps(w, _mm_add_ps(_mm_add_ps(z, y), x)));
+		return getx(_mm_add_ps(w, _mm_add_ps(_mm_add_ps(z, y), x)));
+	#else
+		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
+	#endif
+}
+
+AREAL Anubis::Length(const Vec & v)
+{
+	#ifdef SIMD_MATH_ENABLED
+#else
+	return sqrtf(v.x*v.x + v.y*v.y + v.z*v.z + v.w*v.w);
+#endif
 }
 
 Vec Anubis::Normalize(const Vec& V)
 {
-	/*Vec res;
-
-	__asm
-	{
-		mov	eax, v
-		movaps	xmm0,	[eax]
-		movaps	xmm2,	xmm0
-		mulps	xmm0,	xmm0
-		movaps	xmm1,	xmm0
-		shufps	xmm0,	xmm0,	_MM_SHUFFLE (2, 1, 0, 3)
-		addps	xmm1,	xmm0
-		movaps	xmm0,	xmm1
-		shufps	xmm1,	xmm1,	_MM_SHUFFLE (1, 0, 3, 2)
-		addps	xmm0,	xmm1
-		rsqrtps	xmm0,	xmm0
-		mulps	xmm0,	xmm2
-		movaps	[eax],	xmm0	
-		mov	res, eax
-	}; */
-
+#ifdef SIMD_MATH_ENABLED
 	// Perform the dot product on x,y and z only
     Vec vLengthSq = _mm_mul_ps(V,V);
     Vec vTemp = _mm_shuffle_ps(vLengthSq,vLengthSq,_MM_SHUFFLE(2,1,2,1));
@@ -98,6 +91,9 @@ Vec Anubis::Normalize(const Vec& V)
     Vec vTemp2 = _mm_and_ps(vResult,vLengthSq);
     vResult = _mm_or_ps(vTemp1,vTemp2);
     return vResult;
+#else
+	return V / Length(V);
+#endif
 }
 
 /* ======================================

@@ -16,7 +16,7 @@ namespace Anubis
 	public:
 		AVIRTUAL AVOID		VUpdate(AUINT32 const deltaMilliseconds)								= 0;
 		AVIRTUAL AVOID		VRender(Renderer* pRenderer, AREAL64 r64Time, AREAL64 r64ElapsedTime)	= 0;
-		AVIRTUAL ABOOL		VMsgProc(SystemMessage & msg)											= 0;
+		AVIRTUAL ABOOL		VMsgProc(SystemMessage * msg)											= 0;
 
 		//To order widgets on the screen
 		AVIRTUAL AVOID		VSetZ(AUINT8 z)															= 0;

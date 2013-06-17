@@ -15,7 +15,11 @@ namespace Anubis
 		ID3D11DepthStencilState*	m_pState;
 
 	public:
-		DepthStencilStateDX11() {}
+		DepthStencilStateDX11() { m_pState = NULL; }
 		~DepthStencilStateDX11() { SAFE_RELEASE(m_pState); }
+
+		ABOOL Create(const D3D11_DEPTH_STENCIL_DESC * params);
+
+		AVOID Set(const AUINT32 stencilRef) const;
 	};
 }; //Anubis

@@ -31,6 +31,18 @@ AVOID GameTestState::VInitialize( Game * pGame, AUINTPTR uptrData)
 	pBox = pGame->VAddEntity(box_params.VCreateEntity(pGame));
 	box_params.VCreateRepresentation(m_pScene, pBox);
 
+	box_params.VLoad("Resources\\JSON\\box3_params.json");
+	pBox = pGame->VAddEntity(box_params.VCreateEntity(pGame));
+	box_params.VCreateRepresentation(m_pScene, pBox);
+
+	box_params.VLoad("Resources\\JSON\\box4_params.json");
+	pBox = pGame->VAddEntity(box_params.VCreateEntity(pGame));
+	box_params.VCreateRepresentation(m_pScene, pBox);
+
+	box_params.VLoad("Resources\\JSON\\box5_params.json");
+	pBox = pGame->VAddEntity(box_params.VCreateEntity(pGame));
+	box_params.VCreateRepresentation(m_pScene, pBox);
+
 	//create back wall
 	PlaneEntityResource & plane_params = PlaneEntityResource();
 	plane_params.VLoad("Resources\\JSON\\wall1_params.json");

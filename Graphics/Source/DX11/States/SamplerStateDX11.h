@@ -15,7 +15,7 @@ namespace Anubis
 		ID3D11SamplerState*	m_pState;
 		
 	public:
-		SamplerStateDX11() {}
+		SamplerStateDX11() { m_pState = NULL;}
 		~SamplerStateDX11() { SAFE_RELEASE(m_pState); }
 
 		ABOOL Create(const D3D11_SAMPLER_DESC * pParams);

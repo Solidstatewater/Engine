@@ -17,6 +17,9 @@
 #include "../Lights/PointLight.h"
 #include "../Lights/SpotLight.h"
 
+#include "Final\Resources\Textures\Texture2D.h"
+#include "Final\Resources\Views\Views.h"
+
 namespace Anubis
 {
 	class DeferredRenderer : public Renderer
@@ -41,6 +44,14 @@ namespace Anubis
 		VertexBuffer*	m_pTexCoords;
 		INPUT_LAYOUT*	m_pLayout;
 
+		//===============================
+		//Ambient occlusion
+		INPUT_LAYOUT*	m_pSSAOLayout;
+		ShaderBunch*	m_pSSAOShaders;
+		Texture2D*		m_pSSAOTexture;
+		ShaderResourceView*	m_pSSAOSRV;
+		RenderTargetView*	m_pSSAORTV;
+
 	public:
 		/***		=====		***
 		 Constructor and Destructor
@@ -57,6 +68,7 @@ namespace Anubis
 
 		/***	Light Rendering ***/
 		AVOID PrepareForLightPass(CameraPtr pCamera);
+		AVOID CalculateAmbientOcclusion(CameraPtr pCamera);
 
 		/***	Update Render State		***/
 		AVOID VUpdate(const AUINT32 deltaMilliseconds);

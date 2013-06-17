@@ -13,6 +13,11 @@ DeferredRenderer::DeferredRenderer() : Renderer()
 
 	//create matrix constant buffer
 	m_pMatrixBuffer = new ConstantBuffer();
+
+	m_pSSAOShaders = new ShaderBunch();
+	m_pSSAOTexture = new Texture2D();     
+	m_pSSAOSRV = new ShaderResourceView();
+	m_pSSAORTV = new RenderTargetView();
 }
 
 DeferredRenderer::~DeferredRenderer()
@@ -20,6 +25,8 @@ DeferredRenderer::~DeferredRenderer()
 	//remove all lights
 	while(!m_lights.empty())
 		m_lights.pop_back();
+
+	SAFE_DELETE(m_pSSAOShaders);
 }
 
 ABOOL DeferredRenderer::VInitialize(HWND hWnd, AUINT32 width, AUINT32 height)
@@ -94,6 +101,33 @@ ABOOL DeferredRenderer::VInitialize(HWND hWnd, AUINT32 width, AUINT32 height)
 	m_pLayout[0].InputSlotClass			= IA_PER_VERTEX_DATA;	m_pLayout[1].InputSlotClass			= IA_PER_VERTEX_DATA;
 	m_pLayout[0].InstanceDataStepRate	= 0;					m_pLayout[1].InstanceDataStepRate	= 0;
 
+
+	m_pSSAOLayout = new INPUT_LAYOUT();
+	m_pSSAOLayout->SemanticName		=	"POSITION";
+	m_pSSAOLayout->SemanticIndex	=	0;
+	m_pSSAOLayout->Format			=	TEX_R32G32B32_FLOAT;
+	m_pSSAOLayout->InputSlot		=	0;
+	m_pSSAOLayout->AlignedByteOffset =	0;
+	m_pSSAOLayout->InputSlotClass	=	IA_PER_VERTEX_DATA;
+	m_pSSAOLayout->InstanceDataStepRate =	0;
+
+	m_pSSAOShaders->VSetVertexShader(L"Shaders\\SSAO_Vertex.hlsl", "SSAO_VS", m_pSSAOLayout, 1, TOPOLOGY_TRIANGLELIST);
+	m_pSSAOShaders->VSetPixelShader(L"Shaders\\SSAO_Pixel.hlsl", "SSAO_PS");
+
+	Texture2DParams tex2DParams;
+	tex2DParams.Init(SCREEN_WIDTH, SCREEN_HEIGHT, 1, TEX_R32G32B32A32_FLOAT, true, false, true, false, 1, 0,
+		1, true, false, false);
+	m_pSSAOTexture->Create(&tex2DParams);
+
+	//create shader resource and render target view for the texture
+	ShaderResourceViewParams srvSSAOParams;
+	srvSSAOParams.InitForTexture2D(tex2DParams.Format, 0, 0);
+	m_pSSAOTexture->CreateShaderResourceView(&m_pSSAOSRV->m_pView, &srvSSAOParams);
+
+	RenderTargetViewParams rtvSSAOParams;
+	rtvSSAOParams.InitForTexture2D(tex2DParams.Format, 0);
+	m_pSSAOTexture->CreateRenderTargetView(&m_pSSAORTV->m_pView, &rtvSSAOParams);
+
 	return true;
 }
 
@@ -119,6 +153,49 @@ AVOID DeferredRenderer::VUpdate(const AUINT32 deltaMilliseconds)
 ///////////////////////////////////////////////
 //Rendering
 ///////////////////////////////////////////////
+
+AVOID DeferredRenderer::CalculateAmbientOcclusion(CameraPtr pCamera)
+{
+	m_pSSAOShaders->VBind();
+
+	m_pVertices->Set(0, 0);
+
+	//bind matrix constant buffer to the pipeline
+	Mat4x4 trans;
+	trans.CreateTranslation(pCamera->GetLookAt());
+
+	Mat4x4 rot;
+	rot = rot.CreateRollPitchYaw(pCamera->GetRoll(), pCamera->GetPitch(), pCamera->GetYaw());
+
+	Mat4x4 WVP = rot * trans * pCamera->GetView() * CreateOrthoProjectionLH(SCREEN_WIDTH, SCREEN_HEIGHT, 0.1f, 1000.0f);
+	WVP.Transpose();
+	m_pMatrixBuffer->UpdateSubresource(0, NULL, &WVP, 0, 0);
+	m_pMatrixBuffer->Set(0, ST_Vertex);
+
+	//send SSAO params
+	float4 ssaoParams = float4(20.0f, 2.0f, 5.0f, 2.0f);
+	m_pcbSSAOParams->UpdateSubresource(0, NULL, &ssaoParams, 0, 0);
+	m_pcbSSAOParams->Set(0, ST_Pixel);
+
+	//camera params
+	Vec cameraParams = Vector(pCamera->GetFrustum().GetNearWidth(), pCamera->GetFrustum().GetNearHeight(), 0.0f, 0.0f);
+	m_pcbFrustumSize->UpdateSubresource(0, NULL, &cameraParams, 0, 0);
+	m_pcbFrustumSize->Set(1, ST_Pixel);
+
+	//depth buffer params
+	Vec depthBufferParams = Vector(1.0f / SCREEN_WIDTH, 1.0f / SCREEN_HEIGHT, 0.0f, 0.0f);
+	m_pcbDepthBuffer->UpdateSubresource(0, NULL, &depthBufferParams, 0, 0);
+	m_pcbDepthBuffer->Set(2, ST_Pixel);
+
+	m_pDepthDisableStencilDisable->Set(0);
+	m_pDepthSRV->Set(0, ST_Pixel);
+	m_pSSAORTV->Set();
+
+	D3D11DeviceContext()->Draw(6, 0);
+
+	m_pSSAOSRV->Set(0, ST_Pixel);
+	GetRenderTargetView()->Set();
+}
 
 AVOID DeferredRenderer::PrepareForLightPass(CameraPtr pCamera)
 {
@@ -147,7 +224,7 @@ AVOID DeferredRenderer::PrepareForLightPass(CameraPtr pCamera)
 AVOID DeferredRenderer::VRender()
 {
 	/*** Render Scene For Each Camera ***/
-	for (CameraPtr pCamera : m_cameras)
+ 	for (CameraPtr pCamera : m_cameras)
 	{
 		//Keep track of current view and projection matrices
 		Mat4x4 view			= pCamera->GetView();
@@ -160,6 +237,7 @@ AVOID DeferredRenderer::VRender()
 		// ===================================================== //
 		//	Go through sorted render queue and render each mesh  //
 		// ===================================================== //
+		m_pDepthEnableStencilDisableStandard->Set(0);
 		Mesh * pMesh;
 		while (pMesh = m_queue.Next())
 		{
@@ -181,6 +259,11 @@ AVOID DeferredRenderer::VRender()
 		SetRenderTargetView(); 
 
 		// ========================================= //
+		//	Calculate ambient occlusion				 //
+		// ========================================= //
+		CalculateAmbientOcclusion(pCamera);
+
+		// ========================================= //
 		//	Time for light pass - Render all lights  //
 		// ========================================= //
 		PrepareForLightPass(pCamera);
@@ -196,6 +279,12 @@ AVOID DeferredRenderer::VRender()
 
 			//finally render it
 			pLight->VRender();
+		}
+
+		//clean lights
+		while(!m_lights.empty())
+		{
+			m_lights.pop_back();
 		}
 
 		//unbind g-buffer views

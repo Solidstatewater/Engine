@@ -10,6 +10,7 @@
 #include "Cameras\Camera.h"
 #include "Final/Resources/Buffers/Buffers.h"
 #include "Final/States/SamplerState.h"
+#include "Final/States/DepthStencilState.h"
 #include "Meshes/Meshes.h"
 #include "Lights/Light.h"
 
@@ -32,6 +33,7 @@ namespace Anubis
 
 		//Camera Buffers
 		ConstantBuffer*	m_pcbCameraPos;
+		ConstantBuffer*	m_pcbFrustumSize;
 
 		//Lightning Buffers
 		ConstantBuffer*	m_pcbLight;
@@ -39,11 +41,28 @@ namespace Anubis
 		ConstantBuffer* m_pcbSpotLight;
 		//ConstantBuffer*	m_pcbDirectionalLight;
 
+		//Depth Buffers
+		ConstantBuffer*	m_pcbDepthBuffer;
+
+		//SSAO Buffers
+		ConstantBuffer*	m_pcbSSAOParams;
+		ConstantBuffer*	m_pcbSSAOSamples;
+
 		/** ================================
 					Sampler States
 			================================
 											*/
 		SamplerState*	m_pAnisotropySampler16;
+
+		/** ================================
+					Depth Stencil States
+			================================
+											**/
+		DepthStencilState*	m_pDepthEnableStencilDisableStandard;
+		DepthStencilState*	m_pDepthDisableStencilDisable;
+		Texture2D*			m_pDepthTexture;
+		ShaderResourceView*	m_pDepthSRV;
+		DepthStencilView*	m_pDepthDSV;
 
 		/*** ========================
 					Cameras

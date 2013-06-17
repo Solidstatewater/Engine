@@ -7,5 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Input_pch.cpp" />
+    <ClCompile Include="Source\Controllers.cpp" />
   </ItemGroup>
 </Project>

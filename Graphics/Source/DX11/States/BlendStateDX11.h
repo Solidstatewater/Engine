@@ -15,7 +15,7 @@ namespace Anubis
 		ID3D11BlendState*	m_pState;
 
 	public:
-		BlendStateDX11() {}
+		BlendStateDX11() { m_pState = NULL; }
 		~BlendStateDX11() { SAFE_RELEASE(m_pState); }
 
 		ABOOL Create(const D3D11_BLEND_DESC * pParams);

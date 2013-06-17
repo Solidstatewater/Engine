@@ -43,7 +43,7 @@ EntityRepresentation* BoxEntityResource::VCreateRepresentation(Scene * pScene, E
 	pBoxPointer->SetSize(m_r32X, m_r32Y, m_r32Z);
 	Mat4x4 trans;
 	trans.CreateTranslation(m_pos);
-	pBoxPointer->SetBothTransforms(trans, g_pEngine->CurrentTimeInSeconds());
+	pBoxPointer->SetBothTransforms(trans, g_pEngine->GameTimeInSeconds());
 	pScene->AddRepresentation(pBoxPointer);
 
 	return pBoxPointer;

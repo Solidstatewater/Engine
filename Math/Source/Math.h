@@ -44,6 +44,7 @@ namespace Anubis
 					Vectors
 	========================================= */
 	AREAL Dot(const Vec& v1, const Vec& v2);
+	AREAL Length(const Vec & v);
 	Vec Normalize(const Vec & v);
 
 	/* ======================================

@@ -5,6 +5,13 @@
 
 using namespace Anubis;
 
+PlayerView::PlayerView() : m_bHasCamera(false)
+{
+	m_pMouseHandler = NULL;
+	m_pKeyboardHandler = NULL;
+	m_pController = NULL;
+}
+
 ABOOL PlayerView::VInit()
 {
 	/*** Create Renderer
@@ -34,6 +41,20 @@ AVOID PlayerView::VUpdate(AUINT32 const deltaMilliseconds)
 	{
 		(*it)->VUpdate(deltaMilliseconds);
 	}
+
+	if (!m_pController)	return;
+
+	//update controller
+	m_pController->VUpdate(deltaMilliseconds);
+
+	//Update only if we have camera
+	if (m_bHasCamera)
+	{
+		Vec vel = m_pController->VGetTargetVelocity();
+		m_pCamera->SetPosition(m_pCamera->GetPosition() + vel);
+
+		m_pCamera->VUpdate(deltaMilliseconds);
+	}
 }
 
 AVOID PlayerView::VRender(Renderer *pRenderer, AREAL64 r64Time, AREAL64 r64ElapsedTime)
@@ -51,7 +72,7 @@ AVOID PlayerView::VRender(Renderer *pRenderer, AREAL64 r64Time, AREAL64 r64Elaps
 	}
 }
 
-ABOOL PlayerView::VMsgProc(SystemMessage & msg)
+ABOOL PlayerView::VMsgProc(SystemMessage * msg)
 {
 	//Use reverse_iterator as widgets process messages
 	//from top of screen to bottom
@@ -63,71 +84,71 @@ ABOOL PlayerView::VMsgProc(SystemMessage & msg)
 
 	//no widget processed a message, so give controllers a try
 	ABOOL res = false;
-	switch(msg.m_type)
+	switch(msg->m_type)
 	{
 
 	case SMT_KeyDown:
 		if (m_pKeyboardHandler)
 		{
-			AUINT8 key = static_cast<KeyDownMessage &>(msg).m_key;
-			res = m_pKeyboardHandler->VOnKeyDown(key);
+			KeyDownMessage * pMsg = static_cast<KeyDownMessage *>(msg);
+			res = m_pKeyboardHandler->VOnKeyDown(pMsg->m_key);
 		}
 		break;
 
 	case SMT_KeyUp:
 		if (m_pKeyboardHandler)
 		{
-			AUINT8 key = static_cast<KeyUpMessage &>(msg).m_key;
-			res = m_pKeyboardHandler->VOnKeyUp(key);
+			//AUINT8 key = static_cast<KeyUpMessage &>(msg).m_key;
+			//res = m_pKeyboardHandler->VOnKeyUp(key);
 		}
 		break;
 
 	case SMT_MouseMove:
 		if (m_pMouseHandler)
 		{
-			AREAL posx = static_cast<MouseMoveMessage &>(msg).m_posx;
-			AREAL posy = static_cast<MouseMoveMessage &>(msg).m_posy;
-			res = m_pMouseHandler->VOnMouseMove(posx, posy);
+			//AREAL posx = static_cast<MouseMoveMessage &>(msg).m_posx;
+			//AREAL posy = static_cast<MouseMoveMessage &>(msg).m_posy;
+			//res = m_pMouseHandler->VOnMouseMove(posx, posy);
 		}
 		break;
 
 	case SMT_LMouseDown:
 		if (m_pMouseHandler)
 		{
-			AREAL posx = static_cast<LMouseDownMessage &>(msg).m_posx;
-			AREAL posy = static_cast<LMouseDownMessage &>(msg).m_posy;
+			//AREAL posx = static_cast<LMouseDownMessage &>(msg).m_posx;
+			//AREAL posy = static_cast<LMouseDownMessage &>(msg).m_posy;
 
-			res = m_pMouseHandler->VOnRButtonDown(posx, posy);
+			//res = m_pMouseHandler->VOnRButtonDown(posx, posy);
 		}
 		break;
 
 	case SMT_LMouseUp:
 		if (m_pMouseHandler)
 		{
-			AREAL posx = static_cast<LMouseUpMessage &>(msg).m_posx;
-			AREAL posy = static_cast<LMouseUpMessage &>(msg).m_posy;
+			//AREAL posx = static_cast<LMouseUpMessage &>(msg).m_posx;
+			//AREAL posy = static_cast<LMouseUpMessage &>(msg).m_posy;
 
-			res = m_pMouseHandler->VOnLButtonUp(posx, posy);
+			//res = m_pMouseHandler->VOnLButtonUp(posx, posy);
 		}
 		break;
 
 	case SMT_RMouseDown:
 		if (m_pMouseHandler)
 		{
-			AREAL posx = static_cast<RMouseDownMessage &>(msg).m_posx;
-			AREAL posy = static_cast<RMouseDownMessage &>(msg).m_posy;
+			//AREAL posx = static_cast<RMouseDownMessage &>(msg).m_posx;
+			//AREAL posy = static_cast<RMouseDownMessage &>(msg).m_posy;
 
-			res = m_pMouseHandler->VOnRButtonDown(posx, posy);
+			//res = m_pMouseHandler->VOnRButtonDown(posx, posy);
 		}
 		break;
 
 	case SMT_RMouseUp:
 		if (m_pMouseHandler)
 		{
-			AREAL posx = static_cast<RMouseUpMessage &>(msg).m_posx;
-			AREAL posy = static_cast<RMouseUpMessage &>(msg).m_posy;
+			//AREAL posx = static_cast<RMouseUpMessage &>(msg).m_posx;
+			//AREAL posy = static_cast<RMouseUpMessage &>(msg).m_posy;
 
-			res = m_pMouseHandler->VOnRButtonDown(posx, posy);
+			//res = m_pMouseHandler->VOnRButtonDown(posx, posy);
 		}
 		break;
 	};

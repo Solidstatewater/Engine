@@ -68,6 +68,14 @@ namespace Anubis
 								==*/
 		AINLINE AVOID SetActive(ABOOL isActive) { m_bActive = isActive; }
 
+		AINLINE AVOID SetPosition	(const Vec & pos)	 { m_pos = pos; }
+		AINLINE AVOID SetLookAt		(const Vec & lookAt) { m_lookAt = lookAt; }
+		AINLINE AVOID SetDir		(const Vec & dir)	 { m_dir = dir; }
+
+		AINLINE AVOID SetRoll		(const AREAL roll)	 { m_roll = roll; }
+		AINLINE AVOID SetPitch		(const AREAL pitch)	 { m_pitch = pitch; }
+		AINLINE AVOID SetYaw		(const AREAL yaw)	 { m_yaw = yaw; }
+
 		/*==
 				Accessors
 								==*/
@@ -86,6 +94,7 @@ namespace Anubis
 
 		AINLINE Vec		GetPosition()		const { return m_pos; }
 		Vec				GetLookAt()			const;
+		Vec				GetDir()			const { return m_dir; }
 
 		AINLINE AREAL	GetRoll()			const { return m_roll; }
 		AINLINE AREAL	GetPitch()			const { return m_pitch; }

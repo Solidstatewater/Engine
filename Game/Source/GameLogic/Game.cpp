@@ -26,9 +26,17 @@ ABOOL Game::VInitialize()
 	return true;
 }
 
-LRESULT	Game::VMsgProc(SystemMessage & msg)
+LRESULT	Game::VMsgProc(SystemMessage * msg)
 {
-	return 1;
+	for (Views::iterator iter = m_views.begin(); iter != m_views.end(); iter++)
+	{
+		if ((*iter)->VMsgProc(msg)) 
+		{
+			return 1;
+		}
+	}
+
+	return 0;
 }
 
 AVOID Game::VUpdate(AREAL64 r64Time, AREAL64 r64ElapsedTime)

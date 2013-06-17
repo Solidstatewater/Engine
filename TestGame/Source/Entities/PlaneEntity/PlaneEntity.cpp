@@ -45,7 +45,7 @@ EntityRepresentation* PlaneEntityResource::VCreateRepresentation(Scene * pScene,
 	pPlanePointer->SetSize(m_r32Width, m_r32Height, 1.0f);
 	Mat4x4 trans;
 	trans.CreateTranslation(m_pos);
-	pPlanePointer->SetCurrentTransform(trans, g_pEngine->CurrentTimeInSeconds());
+	pPlanePointer->SetCurrentTransform(trans, g_pEngine->GameTimeInSeconds());
 	pScene->AddRepresentation(pPlanePointer);
 
 	return pPlanePointer;

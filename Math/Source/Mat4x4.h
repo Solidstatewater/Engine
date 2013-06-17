@@ -29,10 +29,10 @@ namespace Anubis
 		ASTATIC Mat4x4 Identity()
 		{
 			Mat4x4 mat;
-			mat.Init(	Vector(0, 0, 0, 1),
-						Vector(0, 0, 1, 0),
+			mat.Init(	Vector(1, 0, 0, 0),
 						Vector(0, 1, 0, 0),
-						Vector(1, 0, 0, 0)	); //create identity matrix
+						Vector(0, 0, 1, 0),
+						Vector(0, 0, 0, 1)	); //create identity matrix
 	
 			return mat;
 		}
@@ -42,10 +42,17 @@ namespace Anubis
 											**/
 		Mat4x4()
 		{
-			rows[0] = _mm_set_ps(0, 0, 0, 1);
-			rows[1] = _mm_set_ps(0, 0, 1, 0);
-			rows[2] = _mm_set_ps(0, 1, 0, 0);
-			rows[3] = _mm_set_ps(1, 0, 0, 0);
+			#ifdef SIMD_MATH_ENABLED
+				rows[0] = _mm_set_ps(0, 0, 0, 1);
+				rows[1] = _mm_set_ps(0, 0, 1, 0);
+				rows[2] = _mm_set_ps(0, 1, 0, 0);
+				rows[3] = _mm_set_ps(1, 0, 0, 0);
+			#else
+				rows[0] = Vector(1, 0, 0, 0);
+				rows[1] = Vector(0, 1, 0, 0);
+				rows[2] = Vector(0, 0, 1, 0);
+				rows[3] = Vector(0, 0, 0, 1);
+			#endif
 		}
 
 		ABOOL Init(	Vec & v0,
@@ -95,18 +102,25 @@ namespace Anubis
 	//----------------------------------------------------
 	AINLINE Vec operator*(Vec v, const Mat4x4 & M)
 	{
-		Vec res;
+		#ifdef SIMD_MATH_ENABLED
+			Vec res;
 
-		//calc first row
-		res = _mm_mul_ps ( _mm_replicate_x_ps(v), M.rows[0]);
-		//calc second row and add result
-		res = _mm_madd_ps( _mm_replicate_y_ps(v), M.rows[1], res);
-		//calc third row and add result
-		res = _mm_madd_ps( _mm_replicate_z_ps(v), M.rows[2], res);
-		//calc fourth row and add result
-		res = _mm_madd_ps( _mm_replicate_w_ps(v), M.rows[3], res);
+			//calc first row
+			res = _mm_mul_ps ( _mm_replicate_x_ps(v), M.rows[0]);
+			//calc second row and add result
+			res = _mm_madd_ps( _mm_replicate_y_ps(v), M.rows[1], res);
+			//calc third row and add result
+			res = _mm_madd_ps( _mm_replicate_z_ps(v), M.rows[2], res);
+			//calc fourth row and add result
+			res = _mm_madd_ps( _mm_replicate_w_ps(v), M.rows[3], res);
 
-		return res;
+			return res;
+		#else
+			return Vec(	v.x * M.rows[0].x + v.y * M.rows[1].x + v.z * M.rows[2].x + v.w * M.rows[3].x,
+						v.x * M.rows[0].y + v.y * M.rows[1].y + v.z * M.rows[2].y + v.w * M.rows[3].y,
+						v.x * M.rows[0].z + v.y * M.rows[1].z + v.z * M.rows[2].z + v.w * M.rows[3].z,
+						v.x * M.rows[0].w + v.y * M.rows[1].w + v.z * M.rows[2].w + v.w * M.rows[3].w);
+		#endif
 } 
 
 	AINLINE ABOOL operator==(const Mat4x4 & m1, const Mat4x4 & m2)

@@ -25,6 +25,11 @@ AVOID RenderTargetViewDX11::Set(const DepthStencilViewDX11 & depthview) const
 	D3D11DeviceContext()->OMSetRenderTargets(1, &m_pView, depthview.m_pView);
 }
 
+AVOID RenderTargetViewDX11::Set() const
+{
+	D3D11DeviceContext()->OMSetRenderTargets(1, &m_pView, NULL);
+}
+
 AVOID RenderTargetViewDX11::Clear(const AREAL * bgColor)
 {
 	D3D11DeviceContext()->ClearRenderTargetView(m_pView, bgColor);

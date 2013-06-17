@@ -12,6 +12,7 @@
 #include "Widget.h"
 
 #include "../../Input/Source/Devices.h"
+#include "../../Input/Source/Controllers.h" 
 
 #include "Anubis.h"
 
@@ -26,7 +27,7 @@ namespace Anubis
 		AVIRTUAL ABOOL		VRestore()											= 0;
 		AVIRTUAL AVOID		VUpdate(AUINT32 const deltaMilliseconds)			= 0;
 		AVIRTUAL AVOID		VRender(Renderer* pRenderer, AREAL64 r64Time, AREAL64 r64ElapsedTime)	= 0;
-		AVIRTUAL ABOOL		VMsgProc(SystemMessage & msg)						= 0;
+		AVIRTUAL ABOOL		VMsgProc(SystemMessage * msg)						= 0;
 
 		AVIRTUAL	AVOID	  VSetCamera(CameraPtr pCamera) = 0;
 		AVIRTUAL	CameraPtr VGetCamera() const = 0;
@@ -37,17 +38,20 @@ namespace Anubis
 	{
 	protected:
 		IMouseHandler*		m_pMouseHandler;
-		IKeyboardHandler*	m_pKeyboardHandler;
+		IKeyboardHandler*	m_pKeyboardHandler;  
+		MovementController*	m_pController;
 
 	public:
-		PlayerView() : m_bHasCamera(false) {}
-		AVIRTUAL ~PlayerView() { }
+		PlayerView();
+		AVIRTUAL ~PlayerView() {
+			SAFE_DELETE(m_pController);
+			}
 
 		AVIRTUAL ABOOL		VInit();
 		AVIRTUAL ABOOL		VRestore();
 		AVIRTUAL AVOID		VUpdate(AUINT32 const deltaMilliseconds);
 		AVIRTUAL AVOID		VRender(Renderer* pRenderer, AREAL64 r64Time, AREAL64 r64ElapsedTime);
-		AVIRTUAL ABOOL		VMsgProc(SystemMessage & msg);
+		AVIRTUAL ABOOL		VMsgProc(SystemMessage * msg);
 
 	protected:
 		/* ==================================
@@ -74,6 +78,10 @@ namespace Anubis
 		AVIRTUAL CameraPtr VGetCamera() const { return m_pCamera; }
 		AVIRTUAL ABOOL VHasCamera() const { return m_bHasCamera; }
 
+		//Mutators
+		AVOID SetMouseHandler(IMouseHandler* pHandler)		 { m_pMouseHandler = pHandler; }
+		AVOID SetKeyboardHandler(IKeyboardHandler* pHandler) { m_pKeyboardHandler = pHandler; }
+		AVOID SetController(MovementController* pController) { m_pController = pController; }
 	};
 
 	//typedefs

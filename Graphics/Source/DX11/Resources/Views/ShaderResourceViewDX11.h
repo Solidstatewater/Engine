@@ -27,7 +27,7 @@ namespace Anubis
 		/*  ==
 			Constructor and Destructor
 			                          == */
-		ShaderResourceViewDX11() {}
+		ShaderResourceViewDX11() { m_pView = NULL; }
 		~ShaderResourceViewDX11() { SAFE_RELEASE(m_pView); }
 
 		/*	==

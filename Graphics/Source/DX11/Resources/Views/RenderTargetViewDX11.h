@@ -25,12 +25,13 @@ namespace Anubis
 		ID3D11RenderTargetView*	m_pView;
 
 	public:
-		RenderTargetViewDX11() {}
+		RenderTargetViewDX11() { m_pView = NULL; }
 		RenderTargetViewDX11(ID3D11RenderTargetView * const pView) { m_pView = pView; }
 
 		~RenderTargetViewDX11() { SAFE_RELEASE(m_pView); }
 
 		AVOID Set(const DepthStencilViewDX11 & depthview) const;
+		AVOID Set() const;
 		AVOID Clear(const AREAL * bgColor);
 		AVOID Clear();
 	};
